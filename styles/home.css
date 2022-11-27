@@ -1,0 +1,64 @@
+body {
+  background-color: var(--greyLight);
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 20px;
+}
+
+.content {
+  padding: 80px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+#createList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 285px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+#createListBtn {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+}
+
+#wordOfDay {
+  border-radius: 4px;
+  background-color: white;
+  padding: 32px;
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+}
+
+.cardList {
+  border-radius: 4px;
+  background-color: white;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardListItem {
+  background-color: var(--greyLight);
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}

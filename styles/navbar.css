@@ -1,0 +1,27 @@
+ul, li {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav {
+  width: 88px;
+  list-style: none;
+  padding: 24px 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navBar {
+  background-color: white;
+}
+
+.navBarItem {
+  padding: 16px;
+  padding-bottom: 32px;
+}
+
+.navBarLink {
+  color: var(--text);
+}

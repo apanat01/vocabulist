@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --bluePrimary: #104111;
-  --blueLight: #6886B8;
+  --bluePrimary: #0038B7;
+  --blueLight: #466DB9;
   --yellowPrimary: #ffc700;
   --greyLight: #f9f9f9;
   --greyMedium: #c6cbce;
@@ -11,16 +11,16 @@
   --font: 'Inter', sans-serif;
 }
 
-h1, h2, h3 h4, h5, body, a, p {
+h1, h2, h3, h4, h5, body, a, p {
   color: var(--text);
-  font: var(--font);
+  font-family: var(--font);
   line-height: 150%;
   margin: 0;
 }
 
 h1 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h2 {
@@ -38,7 +38,7 @@ h4 {
   font-weight: 400;
 }
 
-h5 {
+h5 { 
   font-size: 18px;
   font-weight: 600;
 }
@@ -48,4 +48,9 @@ p, body {
   font-weight: 400;
 }
 
+a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--bluePrimary);
+}
 

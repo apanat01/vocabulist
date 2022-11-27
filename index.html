@@ -1,0 +1,83 @@
+<html>
+  <head>
+    <title>Vocabulist</title>
+    <link rel="stylesheet" type="text/css" href="styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/navbar.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/home.css"/>
+  </head>
+  <body>
+    <nav>
+      <ul class="navBar">
+        <li class="navBarItem">
+          <a class="navBarLink" href="index.html">Logo</a>
+        </li>
+        <li class="navBarItem">
+          <a class="navBarLink" href="index.html">Home</a>
+        </li>
+        <li class="navBarItem">
+          <a class="navBarLink" href="lists.html">My Lists</a>
+        </li>
+        <li class="navBarItem">
+          <a class="navBarLink" href="settings.html">Settings</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="content" style="padding-top: 80px">
+      <div>
+        <h1>Welcome to Vocabulist</h1>
+      </div>
+      <div class="grid">
+        <div id="createList">
+          <a id="createListBtn">
+            <img src="media/icons/plus.svg"/>
+            <p style="color:var(--bluePrimary)">Create list</p>
+          </a>
+        </div>
+        <div id="wordOfDay">
+          <div>
+            <div style="padding-bottom: 40px;">
+              <h3>Word of the Day</h3>
+              <h1 style="color: var(--blueLight)">melancholia</h1>
+              <p style="color: var(--greyDark)">noun | mel-un-KOH-lee-uh</p>
+            </div>
+            <p>Melancholia refers to a feeling of sadness or depression. It is also used to refer to a sad tone or quality that one perceives in something, such as a work of art or literature.</p>
+          </div>
+          <div style="display: flex; flex-direction: column;">
+            <a>Favorite</a>
+            <a>Add to list</a>
+            <a>Translate</a>
+          </div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="cardList"> 
+          <div class="cardHeader">
+           <h3>Your lists</h3>
+           <a href="lists.html">See all</a>
+          </div>
+          <div>
+            <div class="cardListItem">
+              <p>List Name</p>
+              <p>30 words</p>
+            </div>
+          </div>
+        </div>
+        <div class="cardList"> 
+          <div class="cardHeader">
+           <h3>Favorited words</h3>
+           <a href="lists.html">See all</a>
+          </div>
+          <div>
+            <div class="cardListItem">
+              <div class="cardHeader">
+                <p>Word</p>
+                <p style="color:var(--greyDark)">Word form</p>
+              </div>
+              <p>30 words</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
