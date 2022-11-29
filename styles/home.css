@@ -2,6 +2,7 @@ body {
   background-color: var(--greyLight);
   display: grid;
   grid-template-columns: 1fr 8fr;
+  gap: 30px;
 }
 
 .grid {
