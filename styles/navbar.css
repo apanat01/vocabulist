@@ -1,6 +1,6 @@
 nav {
-  width: 132px;
-  padding: 24px 20px;
+  width: 200px;
+  padding: 30px 20px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -12,19 +12,32 @@ nav {
 }
 
 .navBarItem {
-  padding: 16px;
+  padding: 14px 24px 14px 24px;
   margin-bottom: 10px;
   border-radius: 4px;
 }
 
 .navBarItem:hover {
-  background-color: var(--greyLight);
+  background-color: rgb(238, 243, 253);
+}
+
+.navBarItem.current {
+  background-color: rgb(228, 235, 250);
 }
 
 .navBarLink {
   display: flex;
   justify-items: center;
   gap: 6px;
+}
+
+.navBarLinkName {
+  color: var(--greyDark);
+}
+
+.navBarLinkName.current {
+  color: var(--bluePrimary);
+  font-weight: 500;
 }
 
 #homeIcon {
@@ -36,6 +49,11 @@ nav {
   align-self: center;
 }
 
+#homeIcon.current {
+  background-image: url("../media/icons/home-blue.svg");
+  background-repeat: no-repeat;
+}
+
 #listsIcon {
   background-image: url("../media/icons/list.svg");
   background-repeat: no-repeat;
@@ -45,6 +63,11 @@ nav {
   align-self: center;
 }
 
+#listsIcon.current {
+  background-image: url("../media/icons/list-blue.svg");
+  background-repeat: no-repeat;
+}
+
 #settingsIcon {
   background-image: url("../media/icons/settings.svg");
   background-repeat: no-repeat;
@@ -52,4 +75,9 @@ nav {
   height: 20px;
   width: 20px;
   align-self: center;
+}
+
+#settingsIcon.current {
+  background-image: url("../media/icons/settings-blue.svg");
+  background-repeat: no-repeat;
 }
