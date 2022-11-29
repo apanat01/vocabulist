@@ -12,17 +12,17 @@ nav {
 }
 
 .navBarItem {
-  padding: 14px 24px 14px 24px;
+  padding: 12px 24px 12px 24px;
   margin-bottom: 10px;
   border-radius: 4px;
 }
 
 .navBarItem:hover {
-  background-color: rgb(238, 243, 253);
+  background-color: var(--blueLighter);
 }
 
 .navBarItem.current {
-  background-color: rgb(228, 235, 250);
+  background-color: var(--blueLight);
 }
 
 .navBarLink {

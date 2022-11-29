@@ -2,9 +2,11 @@
 
 :root {
   --bluePrimary: #0038B7;
-  --blueLight: #466DB9;
+  --blueMedium: #466DB9;
+  --blueLight: #e4ebfa;
+  --blueLighter: #f4f8ff;
   --yellowPrimary: #ffc700;
-  --greyLight: #f3f3f3;
+  --greyLight: #f7f6f6;
   --greyMedium: #c6cbce;
   --greyDark: #798792;
   --text: #121111;
