@@ -21,6 +21,11 @@
   cursor: pointer;
 }
 
+#createList:hover {
+  border: 2px solid var(--bluePrimary);
+  background-color: var(--blueLighter);
+}
+
 #createListBtn {
   align-items: center;
   display: flex;

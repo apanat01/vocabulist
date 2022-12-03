@@ -5,8 +5,14 @@
     gap: 48px;
 }
 
-form {
+#listProperties {
     display: flex;
     flex-direction: column; 
     gap: 20px;
+}
+
+#termSearch {
+    display: grid;
+    grid-template-columns: 8fr 1fr;
+    gap: 10px;
 }

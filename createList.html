@@ -4,6 +4,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="styles/base.css"/>
     <link rel="stylesheet" type="text/css" href="styles/navbar.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/btn.css">
     <link rel="stylesheet" type="text/css" href="styles/createList.css"/>
     <script src="scripts/navbar.js"></script>
   </head>
@@ -17,7 +18,7 @@
             <p class="navBarLinkName">Home</p>
           </div>
         </a>
-        <a class="navBarItem" href="lists.html">
+        <a class="navBarItem" href="myLists.html">
           <div class="navBarLink">
             <div id="listsIcon"></div>
             <p class="navBarLinkName">My Lists</p>
@@ -34,11 +35,15 @@
     <div class="content">
         <h1>Create new list</h1>
         <div>
-            <form>
+            <form id="listProperties">
                 <input type="text" id="title" name="title" placeholder="Enter title, like 'Personal Finance Terms'">
                 <textarea id="description" name="description" rows="6" cols="10" placeholder="Add a description..."></textarea> 
             </form>
         </div>
+        <form id="termSearch">
+            <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
+            <input type="submit" class="btn-primary-med" value="Search">
+        </form>
     </div>
   </body>
 </html>

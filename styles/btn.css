@@ -1,0 +1,6 @@
+.btn-primary-med {
+    padding: 10px 16px;
+    background-color: var(--bluePrimary);
+    color: white;
+    border-radius: 4px;
+}
