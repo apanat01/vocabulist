@@ -1,10 +1,3 @@
-body {
-  background-color: var(--greyLight);
-  display: grid;
-  grid-template-columns: 1fr 8fr;
-  gap: 30px;
-}
-
 .grid {
   display: grid;
   grid-template-columns: 2fr 3fr;
@@ -25,6 +18,7 @@ body {
   height: 285px;
   border-radius: 4px;
   background-color: white;
+  cursor: pointer;
 }
 
 #createListBtn {

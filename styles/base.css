@@ -13,7 +13,7 @@
   --font: 'Inter', sans-serif;
 }
 
-h1, h2, h3, h4, h5, body, a, p {
+h1, h2, h3, h4, h5, body, a, p, textarea, input {
   color: var(--text);
   font-family: var(--font);
   line-height: 150%;
@@ -56,3 +56,35 @@ a {
   color: var(--bluePrimary);
 }
 
+body {
+  background-color: var(--greyLight);
+  display: grid;
+  grid-template-columns: 1fr 8fr;
+  gap: 30px;
+}
+
+input {
+  outline: none;
+  border: none;
+  width: 100%;
+}
+
+input[type=text] {
+  padding: 12px 14px;
+  border-radius: 4px;
+}
+
+input[type=text]:focus {
+  border-bottom: 2px solid var(--bluePrimary);
+}
+
+textarea {
+  border: none;
+  padding: 10px 12px;
+  border-radius: 4px;
+}
+
+textarea:focus, textarea:focus-visible {
+  outline: none;
+  border-bottom: 2px solid var(--bluePrimary);
+}
