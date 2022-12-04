@@ -5,14 +5,15 @@
     gap: 40px;
 }
 
-#listProperties {
+.header {
     display: flex;
-    flex-direction: column; 
-    gap: 20px;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
 }
 
-#termSearch {
+.grid {
     display: grid;
-    grid-template-columns: 8fr 1fr;
-    gap: 10px;
-}
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }

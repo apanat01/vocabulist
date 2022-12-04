@@ -1,0 +1,37 @@
+.cardListWrapper {
+    border-radius: 4px;
+    background-color: white;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+  
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardListItem {
+    background-color: var(--greyLighter);
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.cardIconGroup {
+    display: flex;
+    gap: 10px;
+}
+
+.wordForm {
+    color: var(--greyDark);
+}

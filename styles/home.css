@@ -5,10 +5,10 @@
 }
 
 .content {
-  padding: 80px 20px 20px 20px;
+  padding: 80px 80px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 40px;
 }
 
 #createList {
@@ -29,7 +29,8 @@
 #createListBtn {
   align-items: center;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 14px;
 }
 
 #wordOfDay {
@@ -40,25 +41,22 @@
   grid-template-columns: 9fr 1fr;
 }
 
-.cardList {
+.iconLink {
+  display: flex;
+  gap: 6px;
   border-radius: 4px;
-  background-color: white;
-  padding: 32px;
+  padding: 4px 6px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.iconLink:hover {
+  background-color: var(--blueLighter);
+}
+
+.linkGroup {
   display: flex;
   flex-direction: column;
   gap: 10px;
-}
-
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.cardListItem {
-  background-color: var(--greyLight);
-  display: flex;
-  justify-content: space-between;
-  padding: 16px;
+  width: 125px;
 }

@@ -3,4 +3,11 @@
     background-color: var(--bluePrimary);
     color: white;
     border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.btn-primary-med:hover {
+    background-color: var(--blueDark);
 }

@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="styles/base.css"/>
     <link rel="stylesheet" type="text/css" href="styles/navbar.css"/>
     <link rel="stylesheet" type="text/css" href="styles/home.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/card.css"/>
     <script src="scripts/navbar.js"></script>
   </head>
   <body>
@@ -38,8 +39,8 @@
       <div class="grid">
         <div id="createList" onclick="location.href='createList.html'">
           <div id="createListBtn" >
-            <img src="media/icons/plus.svg"/>
-            <p class="link">Create list</p>
+            <img src="media/icons/plus-lg.svg"/>
+            <h3>Create new list</h3>
           </div>
         </div>
         <div id="wordOfDay">
@@ -51,38 +52,78 @@
             </div>
             <p>Melancholia refers to a feeling of sadness or depression. It is also used to refer to a sad tone or quality that one perceives in something, such as a work of art or literature.</p>
           </div>
-          <div style="display: flex; flex-direction: column;">
-            <a>Favorite</a>
-            <a>Add to list</a>
-            <a>Translate</a>
+          <div class="linkGroup">
+            <a class="iconLink">
+              <img src="media/icons/star.svg"/>
+              Favorite
+            </a>
+            <a class="iconLink">
+              <img src="media/icons/translate.svg"/>
+              Translate
+            </a>
           </div>
         </div>
       </div>
       <div class="grid">
-        <div class="cardList"> 
+        <div class="cardListWrapper"> 
           <div class="cardHeader">
            <h3>Your lists</h3>
-           <a href="lists.html">See all</a>
+           <a href="myLists.html">See all</a>
           </div>
-          <div>
+          <div class="cardList">
+            <div class="cardListItem">
+              <p>List Name</p>
+              <p>30 words</p>
+            </div>
+          </div>
+          <div class="cardList">
+            <div class="cardListItem">
+              <p>List Name</p>
+              <p>30 words</p>
+            </div>
+          </div>
+          <div class="cardList">
             <div class="cardListItem">
               <p>List Name</p>
               <p>30 words</p>
             </div>
           </div>
         </div>
-        <div class="cardList"> 
+        <div class="cardListWrapper"> 
           <div class="cardHeader">
            <h3>Favorited words</h3>
-           <a href="lists.html">See all</a>
+           <a href="myLists.html">See all</a>
           </div>
-          <div>
+          <div class="cardList">
             <div class="cardListItem">
               <div class="cardHeader">
                 <p>Word</p>
-                <p style="color:var(--greyDark)">Word form</p>
+                <p class="wordForm">Word form</p>
               </div>
-              <p>30 words</p>
+              <div class="cardIconGroup">
+                <img src="media/icons/star-filled.svg"/>
+                <img src="media/icons/translate.svg"/>
+              </div>
+            </div>
+            <div class="cardListItem">
+              <div class="cardHeader">
+                <p>Word</p>
+                <p class="wordForm">Word form</p>
+              </div>
+              <div class="cardIconGroup">
+                <img src="media/icons/star-filled.svg"/>
+                <img src="media/icons/translate.svg"/>
+              </div>
+            </div>
+            <div class="cardListItem">
+              <div class="cardHeader">
+                <p>Word</p>
+                <p class="wordForm">Word form</p>
+              </div>
+              <div class="cardIconGroup">
+                <img src="media/icons/star-filled.svg"/>
+                <img src="media/icons/translate.svg"/>
+              </div>
             </div>
           </div>
         </div>

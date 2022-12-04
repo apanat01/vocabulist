@@ -2,10 +2,12 @@
 
 :root {
   --bluePrimary: #0038B7;
+  --blueDark: #022d93;
   --blueMedium: #466DB9;
   --blueLight: #e4ebfa;
   --blueLighter: #f4f8ff;
   --yellowPrimary: #ffc700;
+  --greyLighter: #F7F9FB;
   --greyLight: #f7f6f6;
   --greyMedium: #c6cbce;
   --greyDark: #798792;
@@ -72,6 +74,7 @@ input {
 input[type=text] {
   padding: 12px 14px;
   border-radius: 4px;
+  font-size: 16px;
 }
 
 input[type=text]:focus {
@@ -82,9 +85,15 @@ textarea {
   border: none;
   padding: 10px 12px;
   border-radius: 4px;
+  font-size: 16px;
 }
 
 textarea:focus, textarea:focus-visible {
   outline: none;
   border-bottom: 2px solid var(--bluePrimary);
+}
+
+button {
+  all: unset;
+  cursor: pointer;
 }
