@@ -43,7 +43,32 @@
         <form id="termSearch">
             <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
             <input type="submit" class="btn-primary-med" value="Search">
+            <input type="button" class= "btn-primary-med" id="submit_btn" value="Finish creating list">
+            <script>
+              // ON SUBMIT
+              $('#submit_btn').click(function(){
+                valid = true;
+                validate();
+                
+                if(valid) {
+                  window.navigate("index.html");
+                }
+              }); 
+              function validate() {
+                // verify that title was entered
+                if($('input:text[name="title"]').val() == "") {
+			            valid = false;
+			            alert("Please enter a title for your list to proceed.");
+                  return;
+                }
+                // verify that there is at least one term entered
+              
+              }
+              
+            </script>
         </form>
     </div>
+      
+      
   </body>
 </html>
