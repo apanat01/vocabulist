@@ -1,0 +1,75 @@
+.content {
+    padding: 60px 80px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settingsCard {
+    border-radius: 4px;
+    background-color: var(--card);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settingsCardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.display-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.display-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+}
+
+.display-switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    background-color: var(--greyMedium);
+    cursor: pointer;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+}
+
+.slider:before {
+    position: absolute;
+    background-color: white;
+    content: "";
+    left: 2px;
+    bottom: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: var(--bluePrimary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(22px);
+}

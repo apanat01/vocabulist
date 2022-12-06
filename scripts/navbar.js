@@ -6,4 +6,10 @@ $(document).ready(function() {
             $(this).find("p").addClass('current');
         }
     });
+
+    if (localStorage.getItem('theme') == 'dark') {
+        $("#listsIcon").removeClass('current');
+        $("#settingsIcon").removeClass('current');
+        $("#homeIcon").removeClass('current');
+    }
 });

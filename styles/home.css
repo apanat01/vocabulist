@@ -5,10 +5,10 @@
 }
 
 .content {
-  padding: 80px 80px 20px 20px;
+  padding: 60px 80px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 20px;
 }
 
 #createList {
@@ -17,13 +17,13 @@
   align-items: center;
   height: 285px;
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--card);
   cursor: pointer;
 }
 
 #createList:hover {
   border: 2px solid var(--bluePrimary);
-  background-color: var(--blueLighter);
+  background-color: var(--hover);
 }
 
 #createListBtn {
@@ -35,7 +35,7 @@
 
 #wordOfDay {
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--card);
   padding: 32px;
   display: grid;
   grid-template-columns: 9fr 1fr;
@@ -51,7 +51,7 @@
 }
 
 .iconLink:hover {
-  background-color: var(--blueLighter);
+  background-color: var(--hover);
 }
 
 .linkGroup {

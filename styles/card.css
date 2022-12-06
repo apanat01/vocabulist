@@ -1,6 +1,6 @@
 .cardListWrapper {
     border-radius: 4px;
-    background-color: white;
+    background-color: var(--card);
     padding: 32px;
     display: flex;
     flex-direction: column;

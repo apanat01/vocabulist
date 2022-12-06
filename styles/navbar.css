@@ -1,7 +1,7 @@
 nav {
   width: 200px;
   padding: 30px 20px;
-  background-color: white;
+  background-color: var(--card);
   display: flex;
   flex-direction: column;
 }
@@ -18,7 +18,7 @@ nav {
 }
 
 .navBarItem:hover {
-  background-color: var(--blueLighter);
+  background-color: var(--hover);
 }
 
 .navBarItem.current {
@@ -36,7 +36,7 @@ nav {
 }
 
 .navBarLinkName.current {
-  color: var(--bluePrimary);
+  color: var(--navBarLink);
   font-weight: 500;
 }
 
