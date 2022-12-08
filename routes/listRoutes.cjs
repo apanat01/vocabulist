@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var path = require('path');
+const bodyParser = require("body-parser");
 
 // Sign up
 router.post("/signup", async (req, res) => {
@@ -27,17 +28,17 @@ router.post("/login", async (req, res) => {
 });
 
 // Create new list
-router.post("/list/create", async (req, res) => {
-    const username = "user1";
-    const list_name = req.body.list_name;
-    const list_description = req.body.list_description;
+router.post("/create", async (req, res) => {
+    const username = req.session.user;
+    const list_name = req.body.title;
+    const list_desc = req.body.list_desc;
+    console.log("creating new list", username, list_name, list_desc);
     const {createNewList} = await import ("../scripts/mongo.js");
-    createNewList(username, list_name, list_description);
-    // res.send("it worked");
+    createNewList(username, list_name, list_desc);
 })
 
 // Get all lists of a user
-router.post("/list/getAll", async (req, res) => {
+router.post("/getAll", async (req, res) => {
     const username = "user2";
     const {getListsFromUser} = await import ("../scripts/mongo.js");
     // console.log(await getListsFromUser(user_id));
@@ -45,15 +46,15 @@ router.post("/list/getAll", async (req, res) => {
 })
 
 // Get words of one list
-router.post("/list/getOne", async (req, res) => {
+router.post("/getOne", async (req, res) => {
     const username = "user2";
     const list_name = "Things";
     const {getWordsFromList} = await import ("../scripts/mongo.js");
     res.json(await getWordsFromList(username, list_name))
 })
 
-// Add word to list
-router.post("/list/addWord", async (req, res) => {
+// Add words to list
+router.post("/addWords", async (req, res) => {
     
 })
 

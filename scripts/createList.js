@@ -5,23 +5,22 @@ const termsHeader = document.getElementById("addedTermsHeader");
 
 // Adds word to "Terms" list
 function addWord(elem) {
-    const btn = elem;
     const parentDiv = (elem.parentNode).parentNode;
-    const word = parentDiv.querySelector(".word").innerHTML;
+    const term = parentDiv.querySelector(".word").innerHTML;
     const definition = parentDiv.querySelector(".definition").innerHTML;
     const ipa = parentDiv.querySelector(".ipa").innerHTML;
-    const partOfSpeech = parentDiv.querySelector(".partOfSpeech").innerHTML;
+    const pos = parentDiv.querySelector(".partOfSpeech").innerHTML;
 
     const wordObj = {
-        "word": word,
-        "definition": definition,
+        "term": term,
         "ipa": ipa,
-        "partOfSpeech": partOfSpeech
+        "pos": pos,
+        "definition": definition
     }
 
     addedWordList.push(wordObj);
     termsHeader.innerHTML = "<h4>Terms</h4>";
-    termsDiv.innerHTML = termsDiv.innerHTML + createAddedWord(word, definition);
+    termsDiv.innerHTML = termsDiv.innerHTML + createAddedWord(term, definition);
 }
    
 // Creates html for word item
@@ -56,7 +55,28 @@ function clearResults() {
     termQuery.value = "";
 }
 
-const createListBtn = document.getElementById("createListBtn");
-createListBtn.addEventListener("click", () => {
-    console.log(addedWordList);
-})
+// // Create and add words to list in db
+// function createList() {
+//     const list_name = document.getElementById("title").value;
+//     const list_desc = document.getElementById("desc").value;
+
+//     console.log(list_name, list_desc);
+//     console.log(typeof list_name);
+
+//     const params = {
+//         list_name: list_name,
+//         list_desc: list_desc
+//     };
+
+//     fetch("/list/create", {
+//         method: "GET",
+//         header: {
+//             "Content-Type": "application/json",
+//             mode: 'no-cors'
+//         },
+//         body: JSON.stringify(params)
+//     })
+//     // .then(res => res.text())
+//     .then(data => console.log("Data", data))
+//     .catch(err => console.log("Err", err));
+// }

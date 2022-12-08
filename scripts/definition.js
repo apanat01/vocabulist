@@ -1,5 +1,10 @@
 const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
+const searchBtn = document.getElementById("searchBtn");
+searchBtn.addEventListener("click", () => {
+    defineWord();
+})
+
 function defineWord() {
     const query = document.getElementById("termQuery").value;
 
