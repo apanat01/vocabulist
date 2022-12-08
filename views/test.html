@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="styles/createList.css"/>
+        <script src="scripts/definition.js"></script>
+    </head>
+    <body>
+        <div>
+            <form id="createListForm" method="post" action="/list/create">
+                <input type="text" id="list_name" name="list_name" placeholder="Enter title, like 'Personal Finance Terms'">
+                <textarea id="list_description" name="list_description" rows="6" cols="10" placeholder="Add a description..."></textarea>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <form id="termSearch" onsubmit="defineWord(); return false">
+            <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
+            <input type="submit" class="btn-primary-med" value="Search">   
+        </form>
+        <div>
+            <p id="resultsInfo"></p>
+        </div>
+        <div id="searchResults">Search results
+            
+        </div>
+    </body>
+</html>

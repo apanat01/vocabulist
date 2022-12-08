@@ -164,6 +164,22 @@ export async function getWordsFromList(username, listName) {
 }
 
 /**
+ * gets array of lists from specified user
+ * ASSUMES: user exists
+ * @param {String} username
+ * @returns array of lists
+ */
+ export async function getListsFromUser(username) {
+    try {
+        console.log("getting lists from user " + username);
+        let lists = await user_lists.distinct("lists",{"username": username});
+        return lists;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+/**
  * adds array of words to favorites for a specified list and user
  * ASSUMES: user exists, list exists, words exist in list
  * does not add duplicates
