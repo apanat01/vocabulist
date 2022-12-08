@@ -6,19 +6,31 @@
     <link rel="stylesheet" type="text/css" href="styles/btn.css"/>
     <link rel="stylesheet" type="text/css" href="styles/login.css"/>
     <script src="scripts/theme.js"></script>
+    <style>
+        #auth-fail {
+            font-size: 12px;
+            color: red;
+            padding: 2px;
+            margin-bottom: 10px;
+            line-height: 13px;
+        }
+    </style>
   </head>
   <body>
     <div id="input-fields">
-        <form id="login-form" action="/signup" method="POST">
+        <form id="login-form" action="/login" method="POST">
             <div style="padding-bottom: 20px; margin-top: 25px;">
-                <h3>Welcome to Vocabulist</h3>
+                <h3>Welcome back to Vocabulist</h3>
+            </div>
+            <div id="auth-fail">
+                We could not find an account matching these credentials.
             </div>
             <label for="username">Username</label>
             <input type="text" name="username" id="username" placeholder="Enter username">
-            <label for="email">Email</label>
+            <label for="email">Password</label>
             <input type="text" name="password" id="password" placeholder="Enter password">
-            <button class="btn-primary-med" id="signup-btn">Sign up for a 1-week free trial</button>
-            <div id="already">Already have an account? <a href="/login">Log In</a></div>
+            <button class="btn-primary-med" id="signup-btn">Log In</button>
+            <div id="already">Don't have an account yet? <a href="/signup">Sign Up</a></div>
         </form>
     </div>
     <script src="scripts/login.js"></script>

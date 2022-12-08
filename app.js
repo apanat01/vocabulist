@@ -52,6 +52,9 @@ app.get("/scripts/createList.js", (req, res) => {
     res.sendFile(path.join(__dirname, './scripts/createList.js'));
 });
 
+app.get("/scripts/login.js", (req, res) => {
+    res.sendFile(path.join(__dirname, './scripts/login.js'));
+});
 
 //TEST
 app.get("/test", (req, res) => {
