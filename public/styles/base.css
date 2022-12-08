@@ -139,3 +139,7 @@ select:active {
 ::placeholder {
   color: var(--greyDark);
 }
+
+form {
+  margin: 0;
+}

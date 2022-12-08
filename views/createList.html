@@ -8,7 +8,6 @@
     <link rel="stylesheet" type="text/css" href="styles/createList.css"/>
     <script src="scripts/navbar.js"></script>
     <script src="scripts/definition.js"></script>
-
     <style>
       .inListPage {
         background-color: white;
@@ -40,95 +39,33 @@
         </a>
       </div>
     </nav>
-    <div class="createList">
+    <div class="content">
         <h1>Create new list</h1>
         <div>
-            <form id="listProperties">
-                <input type="text" id="title" name="title" placeholder="Enter title, like 'Personal Finance Terms'">
-                <textarea id="description" name="description" rows="6" cols="10" placeholder="Add a description..."></textarea> 
-            </form>
+          <form id="listProperties" class="subsection">
+            <input type="text" id="title" name="title" placeholder="Enter title, like 'Personal Finance Terms'">
+            <textarea id="description" name="description" rows="6" cols="10" placeholder="Add a description..."></textarea> 
+          </form>
         </div>
-
-        <div id = "addedTerms" class = "subsection">
-          <h4>Terms</h4>
-          <div class="card">
-            <div class="cardSmall cardAllContent">
-              <p>Word</p>
-              <p class="wordForm">Word form</p>
-              <!-- TODO: get real date -->
-              <p class = "date">11//4/2022</p>
-            </div>
-            <div class="cardIconGroup">
-              <img src="media/icons/star-filled.svg"/>
-              <img src="media/icons/translate.svg"/>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="cardSmall cardAllContent">
-              <p>Word</p>
-              <p class= "wordForm">Word form</p>
-              <!-- TODO: get real date -->
-              <p class = "date">11//4/2022</p>
-            </div>
-            <div class="cardIconGroup">
-              <img src="media/icons/star-filled.svg"/>
-              <img src="media/icons/translate.svg"/>
-            </div>
-          </div>
+        <div>
+          <h4 id="addedTermsHeader"></h4>
+          <div id="addedTerms" class="cardList"></div>
         </div>
-
-        <div id = "addTerms" class = "subsection">
+        <div id="searchWrapper">
           <h4>Add terms</h4>
           <form id="termSearch" onsubmit="defineWord(); return false">
             <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
-            <input type="submit" class="btn-primary-med" value="Search">   
+            <input type="submit" class="btn-primary-med" value="Search">
+            <a id="clearBtn" onclick="clearResults(); return false"></a>  
           </form>
-          <input type="button" class= "btn-primary-med" id="submit_btn" value="Finish creating list">
-          <!-- TODO: add actual search term -->
-          <p class = "searchResultText">3 results for '[search term]'</p>
-        
+          <div id="resultsInfo" class="searchResultText"></div>
+          <div id="searchResults" class="cardList"></div>
         </div>
-        
-        <script>
-          // ON SUBMIT
-          $('#submit_btn').click(function(){
-            valid = true;
-            validate();
-            
-            if(valid) {
-              window.navigate("index.html");
-            }
-          }); 
-          function validate() {
-            // verify that title was entered
-            if($('input:text[name="title"]').val() == "") {
-              valid = false;
-              alert("Please enter a title for your list to proceed.");
-              return;
-            }
-            // verify that there is at least one term entered
-            
-
-            // store the form data
-          }
-        </script>
-
-        <div class = "card">
-          <div class = "cardAllContent">
-            <p>Word</p>
-            <p class = "wordFormSound">noun | mel-un-KOH-lee-uh</p>
-            <p class = "definition">Melancholia refers to a feeling of sadness or depression. It is also used to refer to a sad tone or quality that one perceives in something, such as a work of art or literature.</p>
-          </div>
-          <div class="cardIconGroup">
-            <img src="media/icons/star-filled.svg"/>
-            <img src="media/icons/translate.svg"/>
-          </div>
+        <div style="width: 30%">
+          <input type="button" class="btn-primary-med" id="createListBtn" value="Finish creating list">
         </div>
-        
-
     </div>
-      
+    <script src="scripts/createList.js"></script>
     <script src="scripts/theme.js"></script>
   </body>
 </html>

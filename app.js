@@ -1,5 +1,6 @@
 const pages = require("./routes/pageRoutes.cjs");
 const lists = require("./routes/listRoutes.cjs");
+const translations = require("./routes/translateRoutes.cjs");
 const express = require("express");
 const session = require("express-session");
 const bodyParser = require("body-parser");
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", pages);
 app.use("/", lists);
+app.use("/", translations);
 
 app.get("/scripts/navBar.js", (req, res) => {
     res.sendFile(path.join(__dirname, './scripts/navBar.js'));
@@ -46,6 +48,9 @@ app.get("/scripts/translate.js", (req, res) => {
     res.sendFile(path.join(__dirname, './scripts/translate.js'));
 });
 
+app.get("/scripts/createList.js", (req, res) => {
+    res.sendFile(path.join(__dirname, './scripts/createList.js'));
+});
 
 
 //TEST
