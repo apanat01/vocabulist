@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Vocabulist</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/btn.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/login.css"/>
+    <script src="scripts/theme.js"></script>
+  </head>
+  <body>
+    <div id="input-fields">
+        <form action="/signup" method="POST">
+            <div style="padding-bottom: 20px; margin-top: 25px;">
+                <h3>Welcome to Vocabulist</h3>
+            </div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter username">
+            <label for="email">Email</label>
+            <input type="text" name="password" id="password" placeholder="Enter password">
+            <button class="btn-primary-med" id="signup-btn">Sign up for a 1-week free trial</button>
+            <div id="already">Already have an account? <a href="/login">Log In</a></div>
+
+            <script>
+                $('#signup_btn').click(function(){
+                    console.log("click")
+                    // validate form responses DOESN'T WORK YET
+                    validate();
+
+                    // if (valid) {
+                    //     // hide form and the text above it
+                    //     $('form').hide();
+                    //     $('#form_description').hide();
+                    
+                    //     // show 'back to home' button and submit confirmation text
+                    //     $('#confirmation').show();
+                    // }
+                });
+
+                function validate() {
+                    let message = "";
+                    if ($('input#username').val() == "") {
+                        message += "Please enter your username<br>";
+                    }
+                    if ($('input#password').val() == "") {
+                        message += "Please enter your password";
+                    }
+                    if (message != "") {
+                        alert(message);
+                        return false;
+                    }
+                    return true;
+	            }
+            </script>
+        </form>
+    </div>
+  </body>
+</html>

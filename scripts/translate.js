@@ -24,25 +24,5 @@ function translateWord() {
     .catch(err => console.log(err));
 }
 
-// function translateWord() {
-//     // const url = `${baseURL}/translate/${source_lang}/${target_lang}/${word}`;
-
-//     const url = 'https://api-free.deepl.com/v2/translate/text=Hello%2C%20world!&target_lang=DE';
-
-//     fetch(url, {
-//         method: "POST",
-//         headers: {
-//             "Authorization": "DeepL-Auth-Key ee492802-3821-278e-cdd5-58a527b77c20:fx",
-//             "Content-Type": "application/x-www-form-urlencoded",
-//             "Host": "api-free.deepl.com",
-//             mode: 'no-cors'
-//         }
-
-//     })
-//     .then(res => res.text())
-//     .then(data => console.log(JSON.parse(data)))
-//     .catch(err => console.log(err));
-// }
-
 const translateBtn = document.getElementById("translateBtn");
 translateBtn.addEventListener("click", translateWord(), false);

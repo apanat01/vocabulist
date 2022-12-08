@@ -5,7 +5,19 @@ var __dirname = path.resolve();
 
 // Home
 router.get("/", (req, res) => {
+    console.log(req.session);       // check if there is an existing session
+    if (req.session.user == undefined) {
+        res.sendFile(path.join(__dirname, './views/signup.html'))
+    }
     res.sendFile(path.join(__dirname, './views/index.html'));
+});
+
+router.get("/signUp", (req, res) => {
+    res.sendFile(path.join(__dirname, './views/signup.html'));
+});
+
+router.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, './views/login.html'));
 });
 
 // My Lists

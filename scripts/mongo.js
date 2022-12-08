@@ -1,6 +1,7 @@
 // const { MongoClient } = require('mongodb');
 
 import { MongoClient } from 'mongodb';
+import bcrypt from 'bcrypt';
 
 const uri = "mongodb+srv://dbuser:u8QXNaLsgPie4749@cluster0.z9zkrwk.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
@@ -54,9 +55,11 @@ export async function userExists(username) {
         let result = await user_lists.find({ "username": username }).toArray();
 
         console.log("num users: " + result.length);
-        if (result.length) {
+        if (result.length > 0) {
+            console.log("returning true");
             return true;
         }
+        console.log("returning false");
         return false;
     } catch (e) {
         console.error(e);
@@ -67,15 +70,38 @@ export async function userExists(username) {
  * creates new user if provided username is not already in use
  * @param {String} username 
  */
-export async function createNewUser(username) {
+ export async function createNewUser(username, password) {
     try {
+        console.log("creating new user " + username);
         if (!(await userExists(username))) {
-            let newData = { "username": username, "lists": [], "folders": [] };
-            await user_lists.insertOne(newData);
-            console.log("new user " + username + " inserted");
+            await bcrypt.hash(password, 10, async function(err, hash) {
+                let newData = { "username": username, "password": hash, "lists": [], "folders": [] };
+                await user_lists.insertOne(newData);
+                console.log("new user " + username + " inserted");
+            });
+            
         } else {
             console.log("user " + username + " already exists, aborting insert");
         }        
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+/**
+ * checks if any users in db match provided credentials
+ * @returns true if so, false if not
+ */
+export async function login(username, password) {
+    try {
+        if (await userExists(username)) {
+            const document = await user_lists.find({ "username": username }).toArray();
+            const hash = document[0].password;
+            console.log(hash);
+            const result = await bcrypt.compare(password, hash);
+            return result;
+        }
+        return false;
     } catch (e) {
         console.error(e);
     }
