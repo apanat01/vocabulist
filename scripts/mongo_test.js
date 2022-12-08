@@ -21,6 +21,26 @@ import {
     closeConnection
 } from './mongo.js'
 
+await createNewList("ejaa", "Fruits", "names of fruits");
+await addWordsToList("ejaa", "Fruits", [
+    {term: "apple", ipa: "/'æpl/", pos: "noun", definition: "a round fruit with shiny red or green skin that is fairly hard and white inside"}, 
+    {term: "banana", ipa: "/bə'na:nə/", pos: "noun", definition: "a long curved fruit with a thick yellow skin and that is soft inside"},
+    {term: "coconut", ipa: "/'kəʊkənʌt/", pos: "noun", definition: "the large nut of a tropical tree called a coconut palm"}
+]);
+
+await createNewList("ejaa", "Vegetables", "names of veggies");
+await addWordsToList("ejaa", "Vegetables", [
+    {term: "spinach", ipa: "/'spInItʃ/", pos: "noun", definition: "a vegetable with large, dark-green leaves that are cooked or eaten in salads"}, 
+    {term: "broccoli", ipa: "/'bra:kəli/", pos: "noun", definition: "a vegetable with a thick green stem and several dark green or purple flower heads"},
+    {term: "carrot", ipa: "/'kærət/", pos: "noun", definition: "a long pointed orange root vegetable"},
+    {term: "celery", ipa: "/'seləri/", pos: "noun", definition: "a vegetable with long light-green stems that are often eaten raw"}
+]);
+
+await addWordsToFavorites("ejaa", "Vegetables", [{term: "carrot", ipa: "/'kærət/", pos: "noun", definition: "a long pointed orange root vegetable"}]);
+await createNewFolder("ejaa", "Produce");
+await addListsToFolder("ejaa", "Produce", ["Fruits", "Vegetables"]);
+
+
 console.log(await getAllData());
 
 await createNewUser("user0", "password");

@@ -161,7 +161,7 @@ export async function createNewList(username, listName, listDescription) {
  * does not add duplicates
  * @param {String} username
  * @param {String} listName
- * @param {Array} words 
+ * @param {Array} words an array of objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
 export async function addWordsToList(username, listName, words) {
     try {
@@ -176,7 +176,7 @@ export async function addWordsToList(username, listName, words) {
  * ASSUMES: user exists, list exists
  * @param {String} username 
  * @param {String} listName 
- * @returns array of words
+ * @returns array of word objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
 export async function getWordsFromList(username, listName) {
     try {
@@ -211,7 +211,7 @@ export async function getWordsFromList(username, listName) {
  * does not add duplicates
  * @param {String} username 
  * @param {String} listName 
- * @param {Array} words 
+ * @param {Array} words array of objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
 export async function addWordsToFavorites(username, listName, words) {
     try {
@@ -226,7 +226,7 @@ export async function addWordsToFavorites(username, listName, words) {
  * ASSUMES: user exists, list exists
  * @param {String} username
  * @param {String} listName
- * @returns array of favorites
+ * @returns array of favorited word objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
 export async function getWordsFromFavorites(username, listName) {
     try {
