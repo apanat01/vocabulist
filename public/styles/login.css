@@ -1,0 +1,47 @@
+#input-fields {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    
+    margin: auto;
+    width: 60%;
+    max-width: 370px;
+    height: fit-content;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    border-radius: 4px;
+    background-color: var(--card);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+}
+
+input[type=text] {
+    height: 35px;
+    width: 111%;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #eee;
+}
+
+label {
+    font-size: 14px;
+}
+
+#signup-btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+#already {
+    text-align: center;
+    width: 111%;
+    font-size: 14px;
+    margin-bottom: 30px;
+}

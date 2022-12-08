@@ -2,6 +2,30 @@ const express = require("express");
 const router = express.Router();
 var path = require('path');
 
+// Sign up
+router.post("/signup", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    req.session.user = username;
+    const {createNewUser} = await import ("../scripts/mongo.js");
+    await createNewUser(username, password);
+    res.redirect('/');
+});
+
+// Log in 
+router.post("/login", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const {login} = await import ("../scripts/mongo.js");
+    if (await login(username, password)) {
+        console.log("username: " + username);
+        req.session.user = username;
+        res.redirect('/');
+    } else {
+        res.redirect('/signup');
+    }
+});
+
 // Create new list
 router.post("/list/create", async (req, res) => {
     const username = "user1";

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>Vocabulist</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/btn.css"/>
+    <link rel="stylesheet" type="text/css" href="styles/login.css"/>
+    <script src="scripts/theme.js"></script>
+  </head>
+  <body>
+    <div id="input-fields">
+        <form action="/login" method="POST">
+            <div style="padding-bottom: 20px; margin-top: 25px;">
+                <h3>Welcome back to Vocabulist</h3>
+            </div>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" placeholder="Enter username">
+            <label for="email">Email</label>
+            <input type="text" name="password" id="password" placeholder="Enter password">
+            <button class="btn-primary-med" id="signup-btn">Log In</button>
+            <div id="already">Don't have an account yet? <a href="/signup">Sign Up</a></div>
+        </form>
+    </div>
+  </body>
+</html>

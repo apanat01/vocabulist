@@ -2,6 +2,7 @@ import {
     getAllData, 
     userExists, 
     createNewUser, 
+    login,
     listExists, 
     createNewList, 
     addWordsToList, 
@@ -21,6 +22,20 @@ import {
 } from './mongo.js'
 
 console.log(await getAllData());
+
+await createNewUser("user0", "password");
+
+if (await login("user0", "password")) {
+    console.log("LET'S FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+} else {
+    console.log("ugh");
+}
+
+if (await login("user0", "passwOrd")) {
+    console.log("LET'S FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+} else {
+    console.log("ugh");
+}
 
 // test 1
 if (await userExists("user1")) {
