@@ -5,6 +5,12 @@
     </head>
     <body>
         <div>
+            <form method="get" action="/translate/word">
+                <input type="text" name="word" id="word">
+                <input type="submit" value="test">
+            </form>
+        </div>
+        <div>
             <form id="createListForm" method="post" action="/list/create">
                 <input type="text" id="list_name" name="list_name" placeholder="Enter title, like 'Personal Finance Terms'">
                 <textarea id="list_description" name="list_description" rows="6" cols="10" placeholder="Add a description..."></textarea>
