@@ -23,9 +23,23 @@ router.post("/login", async (req, res) => {
         req.session.user = username;
         res.redirect('/');
     } else {
-        res.redirect('/signup');
+        res.redirect('/loginFail');
     }
 });
+
+// Log in auth failed
+router.post("/loginFail", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const {login} = await import ("../scripts/mongo.js");
+    if (await login(username, password)) {
+        console.log("username: " + username);
+        req.session.user = username;
+        res.redirect('/');
+    } else {
+        res.render('/loginFail');
+    }
+})
 
 // Create new list
 router.post("/create", async (req, res) => {
