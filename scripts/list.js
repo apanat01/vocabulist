@@ -45,9 +45,10 @@ function getWords(term, ipa, pos, definition) {
     wordItem += '<p class="wordInfo">' + ipa + '</p>';
     wordItem += '<p class="wordInfo">' + pos + '</p>';
     wordItem += '<p>' + definition + '</p></div>';
+    wordItem += '<div>';
     wordItem += '<a class="iconBtn" onclick="translateWord(this); return false;">'
     wordItem += '<img src="../../media/icons/translate.svg"/>Translate</a>';
-    wordItem += '</div>'
+    wordItem += '</div></div>'
 
     grid_words.innerHTML = grid_words.innerHTML + wordItem;
 }
