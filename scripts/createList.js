@@ -115,8 +115,10 @@ function addWordsToList() {
 
 const createListBtn = document.getElementById("createListBtn");
 createListBtn.addEventListener("click", () => {
+    const list_name = document.getElementById("list_name").value;
+
     if (createNewList()) {
         addWordsToList();
-        
+        window.location.href = "/list/routelist/?list_name=" + list_name;
     };
 })
