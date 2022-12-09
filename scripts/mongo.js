@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
 
-const uri = "mongodb+srv://dbuser:u8QXNaLsgPie4749@cluster0.z9zkrwk.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI || "mongodb+srv://dbuser:u8QXNaLsgPie4749@cluster0.z9zkrwk.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
 const database = client.db('vocabulist');
 const user_lists = database.collection('user_lists');
