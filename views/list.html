@@ -2,18 +2,16 @@
   <head>
     <title>Vocabulist</title>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="styles/base.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/navbar.css"/>
-    <link rel="stylesheet" type="text/css" href="styles/list.css"/>
-    <script src="scripts/navbar.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../styles/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../styles/navbar.css"/>
+    <link rel="stylesheet" type="text/css" href="../../styles/list.css"/>
+    <script src="../../scripts/navbar.js"></script>
 
   </head>
   <body>
     <nav>
       <div class="navBar">
-        <a href="/">
-          <img src="media/logo.svg" alt="Vocabulist logo" width="100%">
-        </a>
+        <img src="../../media/logo.svg">
         <a class="navBarItem" href="/">
           <div class="navBarLink">
             <div id="homeIcon"></div>
@@ -32,22 +30,17 @@
             <p class="navBarLinkName">Settings</p>
           </div>
         </a>
-        <a class="navBarItem" href="/logout" style="margin-top: 30px">
-          <div class="navBarLink">
-            <p class="navBarLinkName">Log Out</p>
-          </div>
-        </a>
       </div>
     </nav>
   <div class="content">
     <div class="header">
-      <h1>Business Terms</h1>
+      <h1 id="listHeader"></h1>
     </div>
-    <p>Welcome to Your List! <br> Below are the words with its IPA, POS, and Definition.</p> <br>
+    <p>Welcome to Your List! <br> Below are the words with its IPA, Part of Speech, and Definition.</p> <br>
     <div class="grid" id="grid_words">
     </div>
   </div>
-  <script type="text/javascript" src="scripts/list.js"></script>
-  <script src="scripts/theme.js"></script>
+  <script src="../../scripts/list.js"></script>
+  <script src="../../scripts/theme.js"></script>
 </body>
 </html>
