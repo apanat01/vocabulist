@@ -46,7 +46,7 @@ async function createNewUser(username, password) {
         console.log("creating new user " + username);
         if (!(await userExists(username))) {
             await bcrypt.hash(password, 10, async function(err, hash) {
-                let newData = { "username": username, "password": hash, "lists": [], "folders": [] };
+                let newData = { "username": username, "password": hash, "lists": [] };
                 await user_lists.insertOne(newData);
                 console.log("new user " + username + " inserted");
             });
@@ -113,8 +113,7 @@ async function createNewList(username, listName, listDescription) {
                         "list_name": listName,
                         "list_description": listDescription,
                         "date_created": new Date(),
-                        "words": [],
-                        "favorites": [] } } });
+                        "words": [] } } });
             console.log("new list " + listName + " inserted for user " + username);
         } else {
             console.log("list with name " + listName + " already exists for user " + username + ", aborting insert");
@@ -176,72 +175,6 @@ async function getListsFromUser(username) {
 }
 
 /**
- * adds an object to the folder array consisting of a key that is the name of the folder and value of an empty array
- * ASSUMES: user exists
- * @param {String} username 
- * @param {String} folderName 
- */
-async function createNewFolder(username, folderName) {
-    try {
-        await user_lists.updateOne({ "username": username, "folders.folder_name": { $ne: folderName } }, { $addToSet: { "folders": { "folder_name": folderName, "folder_lists": [] } } } );
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * gets names of folders for specified user
- * ASSUMES: user exists
- * @param {String} username 
- * @returns array of folder names
- */
-async function getFolderNames(username) {
-    try {
-        let result = await user_lists.find({ "username": username }).toArray();
-        let folderNames = [];
-        for (let i = 0; i < result[0].folders.length; i++) {
-            folderNames.push(result[0].folders[i].folder_name);
-        }
-        return folderNames;
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * adds list names to specified folder for specified user
- * ASSUMES: user exists, folder exists, lists exist
- * @param {String} username 
- * @param {String} folderName 
- * @param {Array} listNames 
- */
-async function addListsToFolder(username, folderName, listNames) {
-    try {
-        await user_lists.updateOne({ "username": username, "folders.folder_name": folderName}, { $addToSet: { "folders.$.folder_lists": { $each: listNames }}})
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * gets names of lists that have been added to specified folder for specified user
- * ASSUMES: user exists, folder exists
- * @param {String} username 
- * @param {String} folderName 
- * @returns array of list names
- */
-async function getListsFromFolder(username, folderName) {
-    try {
-        console.log("getting lists from folder " + folderName);
-        let result = await user_lists.find({ "username": username }).toArray();
-        let lists = await result[0].folders.find(folder => folder.folder_name == folderName).folder_lists;
-        return lists;
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
  * removes words from specified list for specified user
  * ASSUMES: user exists, list exists, all words to be removed exist
  * @param {String} username 
@@ -250,33 +183,6 @@ async function getListsFromFolder(username, folderName) {
 async function removeWordsFromList(username, listName, words) {
     try {
         await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $pull: { "lists.$.words": { $in: words } } });
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * removes lists from specified folder for specified user
- * ASSUMES: user exists, folder exists, all lists to be removed exist
- * @param {String} username 
- * @param {String} folderName 
- * @param {Array} lists - array of list names to be removed
- */
-async function removeListsFromFolder(username, folderName, listNames) {
-    try {
-        await user_lists.updateOne({ "username": username, "folders.folder_name": folderName}, { $pull: { "folders.$.folder_lists": { $in: listNames }}});
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * removes folder for specified user
- * ASSUMES: user exists, folder exists
- */
-async function removeFolder(username, folderName) {
-    try {
-        await user_lists.updateOne({ "username": username }, { $pull: { "folders": { "folder_name": folderName } }});
     } catch (e) {
         console.error(e);
     }
@@ -313,13 +219,7 @@ module.exports = {
     addWordsToList, 
     getWordsFromList,
     getListsFromUser,
-    createNewFolder, 
-    getFolderNames,
-    addListsToFolder,
-    getListsFromFolder,
     removeWordsFromList,
-    removeListsFromFolder,
-    removeFolder,
     removeList,
     closeConnection
 }

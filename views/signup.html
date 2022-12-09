@@ -10,7 +10,7 @@
   <body>
     <img id="logo" src="media/logo.svg">
     <div id="input-fields">
-        <form id="login-form" action="/signup" method="POST">
+        <form id="signup-form" action="/signup" method="POST">
             <div style="padding-bottom: 20px; margin-top: 25px;">
                 <h3>Welcome to Vocabulist</h3>
             </div>
@@ -22,6 +22,35 @@
             <div id="already">Already have an account? <a href="/login">Log In</a></div>
         </form>
     </div>
-    <script src="scripts/login.js"></script>
+    <script>
+      $("#signup-form").submit(function (e) {
+          if (!validate()) {
+              e.preventDefault(e);   
+              return;
+          }
+      });
+
+      function validate() {
+          let message = "";
+          if ($('input#username').val() == "") {
+              message += "Username cannot be blank\n";
+          } else if (containsNonUnderscoreSpecialChars($('input#username').val())) {
+              message += "Username cannot contain any special characters besides _\n"
+          }
+          if ($('input#password').val().length < 6) {
+              message += "Password must be at 6 or more characters";
+          }
+          if (message != "") {
+              alert(message);
+              return false;
+          }
+          return true;
+      }
+
+      function containsNonUnderscoreSpecialChars(str) {
+        const specialChars = /[`!@#$%^&*()+\-=\[\]{};':"\\|,.<>\/?~]/;
+        return specialChars.test(str);
+      }
+    </script>
   </body>
 </html>

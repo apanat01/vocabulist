@@ -7,13 +7,7 @@ const {
     createNewList, 
     addWordsToList, 
     getWordsFromList,
-    createNewFolder, 
-    getFolderNames,
-    addListsToFolder,
-    getListsFromFolder,
     removeWordsFromList,
-    removeListsFromFolder,
-    removeFolder,
     removeList,
     closeConnection
 } = require("./mongo");
@@ -35,10 +29,6 @@ async function runTests () {
         {term: "carrot", ipa: "/'kærət/", pos: "noun", definition: "a long pointed orange root vegetable"},
         {term: "celery", ipa: "/'seləri/", pos: "noun", definition: "a vegetable with long light-green stems that are often eaten raw"}
     ]);
-
-    // await addWordsToFavorites("ejaa", "Vegetables", [{term: "carrot", ipa: "/'kærət/", pos: "noun", definition: "a long pointed orange root vegetable"}]);
-    await createNewFolder("ejaa", "Produce");
-    await addListsToFolder("ejaa", "Produce", ["Fruits", "Vegetables"]);
 
     // unit testing
     console.log(await getAllData());
@@ -133,33 +123,6 @@ async function runTests () {
         console.log("[FAIL] test 8");
     }
 
-    // test 9: create new folder
-    await createNewFolder("ejaa", "Folder1");
-    await createNewFolder("ejaa", "Folder2");
-    resultString = "";
-    let folders = await getFolderNames("ejaa");
-    for (let i = 0; i < folders.length; i++) {
-        resultString += folders[i] + ", ";
-    }
-    if (resultString.includes("Folder1, Folder2,")) {
-        console.log("[PASS] " + resultString);
-    } else {
-        console.log("[FAIL] test 9" + resultString);
-    }
-
-    // test 10: add lists to folder
-    await addListsToFolder("ejaa", "Folder1", ["Weather", "Vegetables"]);
-    resultString = "";
-    let lists = await getListsFromFolder("ejaa", "Folder1");
-    for (let i = 0; i < lists.length; i++) {
-        resultString += lists[i] + ", ";
-    }
-    if (resultString.includes("Weather, Vegetables,")) {
-        console.log("[PASS] " + resultString);
-    } else {
-        console.log("[FAIL] test 10" + resultString);
-    }
-
     // test 11: remove words from list
     await removeWordsFromList("ejaa", "Weather", [{term: "rainy", ipa: "/'reIni/", pos: "adjective", definition: "having or bringing a lot of rain"}]);
     resultString = "";
@@ -171,32 +134,6 @@ async function runTests () {
         console.log("[PASS] " + resultString);
     } else {
         console.log("[FAIL] test 11");
-    }
-
-    // test 13: remove lists from folder
-    await removeListsFromFolder("ejaa", "Folder1", ["Vegetables"]);
-    resultString = "";
-    lists = await getListsFromFolder("ejaa", "Folder1");
-    for (let i = 0; i < lists.length; i++) {
-        resultString += lists[i] + ", ";
-    }
-    if (!resultString.includes("Vegetables,")) {
-        console.log("[PASS] " + resultString);
-    } else {
-        console.log("[FAIL] test 13");
-    }
-
-    // test 14: remove folder
-    await removeFolder("ejaa", "Folder2");
-    resultString = "";
-    folders = await getFolderNames("ejaa");
-    for (let i = 0; i < folders.length; i++) {
-        resultString += folders[i] + ", ";
-    }
-    if (!resultString.includes("Folder2")) {
-        console.log("[PASS] " + resultString);
-    } else {
-        console.log("[FAIL] test 14" + resultString);
     }
 
     // test 15: create new list
