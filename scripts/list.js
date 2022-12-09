@@ -39,11 +39,10 @@ const grid_words = document.getElementById("grid_words");
 function getWords(term, ipa, pos, definition) {
     var WordItem = '<div class="gridItem">';
     WordItem = '<div class="wordHeader">';
-    WordItem += '<p style="width: 10%">' + term + '</p>';
-    WordItem += '<p style="width: 10%">' + ipa + '</p>';
-    WordItem += '<p style="width: 8%">' + pos + '</p>';
+    WordItem += '<p style="width: 12%">' + term + '</p>';
+    WordItem += '<p style="width: 12%">' + ipa + '</p>';
+    WordItem += '<p style="width: 12%">' + pos + '</p>';
     WordItem += '<p style="width: 60%">' + definition + '</p>';
-    WordItem += '<img src="media/icons/star-filled.svg" width="2.5%"/>';
     WordItem += '<img src="media/icons/translate.svg" width="2.5%"/>';
     WordItem += '</div></div>'
 
