@@ -1,5 +1,3 @@
-// const { MongoClient } = require('mongodb');
-
 import { MongoClient } from 'mongodb';
 import bcrypt from 'bcrypt';
 
@@ -8,30 +6,6 @@ const client = new MongoClient(uri);
 const database = client.db('vocabulist');
 const user_lists = database.collection('user_lists');
 
-async function main() {
-    try {
-        // await client.connect();
-        // await listDatabases();
-        // await getAllData();
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await client.close();
-    }
-}
-
-async function listDatabases() {
-    try {
-        databasesList = await client.db().admin().listDatabases();
-    
-        console.log("Databases:");
-        databasesList.databases.forEach(db => console.log('- ' + db.name));
-
-    } catch (e) {
-        console.error(e);
-    } 
-} 
-
 /**
  * gets all data from all documents
  * @returns array of all data
@@ -39,8 +13,6 @@ async function listDatabases() {
 export async function getAllData() {
     try {
         return await user_lists.find().toArray();
-        // console.log(data);
-
     } catch (e) {
         console.error(e);
     } 
@@ -54,8 +26,7 @@ export async function userExists(username) {
     try {
         let result = await user_lists.find({ "username": username }).toArray();
 
-        console.log("num users: " + result.length);
-        if (result.length > 0) {
+        if (result.length) {
             console.log("returning true");
             return true;
         }
@@ -117,7 +88,6 @@ export async function listExists(username, listName) {
     try {
         let result = await user_lists.find({ "username": username, "lists.list_name": listName }).toArray();
 
-        console.log("num lists: " + result.length);
         if (result.length) {
             return true;
         }
@@ -253,6 +223,12 @@ export async function createNewFolder(username, folderName) {
     }
 }
 
+/**
+ * gets names of folders for specified user
+ * ASSUMES: user exists
+ * @param {String} username 
+ * @returns array of folder names
+ */
 export async function getFolderNames(username) {
     try {
         let result = await user_lists.find({ "username": username }).toArray();
@@ -303,7 +279,7 @@ export async function getListsFromFolder(username, folderName) {
  * removes words from specified list for specified user
  * ASSUMES: user exists, list exists, all words to be removed exist
  * @param {String} username 
- * @param {Array} words - words to remove
+ * @param {Array} words - array of words objects to remove with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
 export async function removeWordsFromList(username, listName, words) {
     try {
@@ -313,6 +289,13 @@ export async function removeWordsFromList(username, listName, words) {
     }
 }
 
+/**
+ * removes words from favorites for specified user
+ * ASSUMES: user exists, list exists, all words to be removed exist
+ * @param {String} username 
+ * @param {String} listName 
+ * @param {Array} words - array of words objects to remove with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
+ */
 export async function removeWordsFromFavorites(username, listName, words) {
     try {
         await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $pull: { "lists.$.favorites": { $in: words } } });
@@ -321,6 +304,13 @@ export async function removeWordsFromFavorites(username, listName, words) {
     }
 }
 
+/**
+ * removes lists from specified folder for specified user
+ * ASSUMES: user exists, folder exists, all lists to be removed exist
+ * @param {String} username 
+ * @param {String} folderName 
+ * @param {Array} lists - array of list names to be removed
+ */
 export async function removeListsFromFolder(username, folderName, listNames) {
     try {
         await user_lists.updateOne({ "username": username, "folders.folder_name": folderName}, { $pull: { "folders.$.folder_lists": { $in: listNames }}});
@@ -329,6 +319,10 @@ export async function removeListsFromFolder(username, folderName, listNames) {
     }
 }
 
+/**
+ * removes folder for specified user
+ * ASSUMES: user exists, folder exists
+ */
 export async function removeFolder(username, folderName) {
     try {
         await user_lists.updateOne({ "username": username }, { $pull: { "folders": { "folder_name": folderName } }});
@@ -337,6 +331,12 @@ export async function removeFolder(username, folderName) {
     }
 }
 
+/**
+ * removes list for specified user
+ * ASSUMES, user exists, list existss
+ * @param {String} username 
+ * @param {String} listName 
+ */
 export async function removeList(username, listName) {
     try {
         await user_lists.updateOne({ "username": username }, { $pull: { "lists": { "list_name": listName } }});
@@ -345,6 +345,9 @@ export async function removeList(username, listName) {
     }
 }
 
+/**
+ * closes mongo client connection
+ */
 export async function closeConnection() {
     await client.close();
 }
