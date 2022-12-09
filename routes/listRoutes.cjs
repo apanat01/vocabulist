@@ -75,4 +75,15 @@ router.post("/list/addWords", async (req, res) => {
     res.json(await addWordsToList(username, list_name, words));
 })
 
+// Get words from list
+router.post("/list/getWords", async (req, res) => {
+    const username = "ejaa";
+    const list_name = "Fruits";
+    // console.log(req.body)
+    const {getWordsFromList} = await import ("../scripts/mongo.js");
+    // console.log(await getListsFromUser(user_id));
+    // console.log(list_name);
+    res.json(await getWordsFromList(username, list_name));
+})
+
 module.exports = router;

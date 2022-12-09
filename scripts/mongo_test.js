@@ -21,6 +21,7 @@ import {
     closeConnection
 } from './mongo.js'
 
+// sample data for testing
 await createNewList("ejaa", "Fruits", "names of fruits");
 await addWordsToList("ejaa", "Fruits", [
     {term: "apple", ipa: "/'æpl/", pos: "noun", definition: "a round fruit with shiny red or green skin that is fairly hard and white inside"}, 
@@ -40,85 +41,92 @@ await addWordsToFavorites("ejaa", "Vegetables", [{term: "carrot", ipa: "/'kærə
 await createNewFolder("ejaa", "Produce");
 await addListsToFolder("ejaa", "Produce", ["Fruits", "Vegetables"]);
 
-
+// unit testing
 console.log(await getAllData());
 
 await createNewUser("user0", "password");
 
+// test -1: successful authentication
 if (await login("user0", "password")) {
-    console.log("LET'S FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    console.log("[PASS] user0 successfully authenticated");
 } else {
-    console.log("ugh");
+    console.log("[FAIL] test -1");
 }
 
-if (await login("user0", "passwOrd")) {
-    console.log("LET'S FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+// test 0: unsuccessful authentication
+if (!(await login("user0", "passwOrd"))) {
+    console.log("[PASS] user0 password is incorrect");
 } else {
-    console.log("ugh");
+    console.log("[FAIL] test 0");
 }
 
-// test 1
-if (await userExists("user1")) {
-    console.log("[PASS] user1 found!!!!");
+// test 1: user exists
+if (await userExists("ejaa")) {
+    console.log("[PASS] ejaa exists");
 } else {
     console.log("[FAIL] test 1");
 }
 
-// test 2
+// test 2: user does not exist
 if (!(await userExists("user4"))) {
     console.log("[PASS] user4 does not exist");
 } else {
     console.log("[FAIL] test 2");
 }
 
-// test3
-await createNewUser("user3");
+// test3: create new user
+await createNewUser("user3", "password");
 if (await userExists("user3")) {
-    console.log("[PASS] user3 successfully exists!");
+    console.log("[PASS] user3 exists");
 } else {
     console.log("[FAIL] test 3");
 }
 
-// test 4
-if (await listExists("user2", "Things")) {
-    console.log("[PASS] user2 list with name Things EXISTS");
+// test 4: list exists
+if (await listExists("ejaa", "Fruits")) {
+    console.log("[PASS] ejaa list with name Fruits exists");
 } else {
     console.log("[FAIL] test 4");
 }
 
-// test 5
-if (!(await listExists("user2", "Objects"))) {
-    console.log("[PASS] user2 list with name Objects DOES NOT EXIST");
+// test 5: list does not exist
+if (!(await listExists("ejaa", "Objects"))) {
+    console.log("[PASS] ejaa list with name Objects does not exist");
 } else {
     console.log("[FAIL] test 5");
 }
 
-// test 6
-await createNewList("user2", "Weather", "words for describing weather");
-if (await listExists("user2", "Weather")) {
-    console.log("[PASS] list with name Weather successfully exists for user2");
+// test 6: create new list
+await createNewList("ejaa", "Weather", "words for describing weather");
+if (await listExists("ejaa", "Weather")) {
+    console.log("[PASS] list with name Weather successfully exists for ejaa");
 } else {
     console.log("[FAIL] test 6");
 }
 
-// test 7
+// test 7: get words from list
 let resultString = "";
-let words = await getWordsFromList("user2", "Things");
+let words = await getWordsFromList("ejaa", "Fruits");
 for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+    resultString += words[i].term + ", ";
 }
-if (resultString.includes("bongo,")) {
+if (resultString.includes("apple, banana, coconut,")) {
     console.log("[PASS] " + resultString);
 } else {
     console.log("[FAIL] test 7");
 }
 
-// test 8
-await addWordsToList("user2", "Weather", ["sunny", "cloudy", "windy", "rainy"]);
+// test 8: add words to list
+await addWordsToList("ejaa", "Weather", [
+    {term: "sunny", ipa: "/'sʌni/", pos: "adjective", definition: "with a lot of bright light from the sun"},
+    {term: "cloudy", ipa: "/'klaʊdi/", pos: "adjective", definition: "(of the sky or the weather) covered with clouds; with a lot of clouds"},
+    {term: "windy", ipa: "/'wIndi/", pos: "adjective", definition: "(of weather, etc.) with a lot of wind"},
+    {term: "rainy", ipa: "/'reIni/", pos: "adjective", definition: "having or bringing a lot of rain"}
+]);
 resultString = "";
-words = await getWordsFromList("user2", "Weather");
+words = await getWordsFromList("ejaa", "Weather");
 for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+    resultString += words[i].term + ", ";
 }
 if (resultString.includes("sunny, cloudy, windy, rainy,")) {
     console.log("[PASS] " + resultString);
@@ -126,23 +134,27 @@ if (resultString.includes("sunny, cloudy, windy, rainy,")) {
     console.log("[FAIL] test 8");
 }
 
-// test 9
-await addWordsToFavorites("user2", "Weather", ["sunny", "windy"]);
+// test 9: add words to favorites
+await addWordsToFavorites("ejaa", "Weather", [
+    {term: "sunny", ipa: "/'sʌni/", pos: "adjective", definition: "with a lot of bright light from the sun"},
+    {term: "windy", ipa: "/'wIndi/", pos: "adjective", definition: "(of weather, etc.) with a lot of wind"}
+]);
 resultString = "";
-words = await getWordsFromFavorites("user2", "Weather");
+words = await getWordsFromFavorites("ejaa", "Weather");
 for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+    resultString += words[i].term + ", ";
 }
 if (resultString.includes("sunny, windy,")) {
     console.log("[PASS] " + resultString);
 } else {
-    console.log("[FAIL] test 9");
+    console.log("[FAIL] test 9 " + resultString);
 }
 
-// test 9.5
-await createNewFolder("user2", "Folder2");
+// test 9.5: create new folder
+await createNewFolder("ejaa", "Folder1");
+await createNewFolder("ejaa", "Folder2");
 resultString = "";
-let folders = await getFolderNames("user2");
+let folders = await getFolderNames("ejaa");
 for (let i = 0; i < folders.length; i++) {
     resultString += folders[i] + ", ";
 }
@@ -152,25 +164,25 @@ if (resultString.includes("Folder1, Folder2,")) {
     console.log("[FAIL] test 9.5" + resultString);
 }
 
-// test 10
-await addListsToFolder("user2", "Folder1", ["Weather"]);
+// test 10: add lists to folder
+await addListsToFolder("ejaa", "Folder1", ["Weather", "Vegetables"]);
 resultString = "";
-let lists = await getListsFromFolder("user2", "Folder1");
+let lists = await getListsFromFolder("ejaa", "Folder1");
 for (let i = 0; i < lists.length; i++) {
     resultString += lists[i] + ", ";
 }
-if (resultString.includes("Things, Weather")) {
+if (resultString.includes("Weather, Vegetables,")) {
     console.log("[PASS] " + resultString);
 } else {
     console.log("[FAIL] test 10" + resultString);
 }
 
-// test 11
-await removeWordsFromList("user2", "Weather", ["rainy"]);
+// test 11: remove words from list
+await removeWordsFromList("ejaa", "Weather", [{term: "rainy", ipa: "/'reIni/", pos: "adjective", definition: "having or bringing a lot of rain"}]);
 resultString = "";
-words = await getWordsFromList("user2", "Weather");
+words = await getWordsFromList("ejaa", "Weather");
 for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+    resultString += words[i].term + ", ";
 }
 if (!resultString.includes("rainy")) {
     console.log("[PASS] " + resultString);
@@ -178,12 +190,12 @@ if (!resultString.includes("rainy")) {
     console.log("[FAIL] test 11");
 }
 
-// test 12
-await removeWordsFromFavorites("user2", "Weather", ["windy"]);
+// test 12: remove words from favorites
+await removeWordsFromFavorites("ejaa", "Weather", [{term: "windy", ipa: "/'wIndi/", pos: "adjective", definition: "(of weather, etc.) with a lot of wind"}]);
 resultString = "";
-words = await getWordsFromFavorites("user2", "Weather");
+words = await getWordsFromFavorites("ejaa", "Weather");
 for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+    resultString += words[i].term + ", ";
 }
 if (!resultString.includes("windy")) {
     console.log("[PASS] " + resultString);
@@ -191,23 +203,23 @@ if (!resultString.includes("windy")) {
     console.log("[FAIL] test 12");
 }
 
-// test 13
-await removeListsFromFolder("user2", "Folder1", ["Weather"]);
+// test 13: remove lists from folder
+await removeListsFromFolder("ejaa", "Folder1", ["Vegetables"]);
 resultString = "";
-words = await getListsFromFolder("user2", "Folder1");
-for (let i = 0; i < words.length; i++) {
-    resultString += words[i] + ", ";
+lists = await getListsFromFolder("ejaa", "Folder1");
+for (let i = 0; i < lists.length; i++) {
+    resultString += lists[i] + ", ";
 }
-if (resultString.includes("Things, Things,")) {
+if (!resultString.includes("Vegetables,")) {
     console.log("[PASS] " + resultString);
 } else {
     console.log("[FAIL] test 13");
 }
 
-// test 14
-await removeFolder("user2", "Folder2");
+// test 14: remove folder
+await removeFolder("ejaa", "Folder2");
 resultString = "";
-folders = await getFolderNames("user2");
+folders = await getFolderNames("ejaa");
 for (let i = 0; i < folders.length; i++) {
     resultString += folders[i] + ", ";
 }
@@ -217,14 +229,17 @@ if (!resultString.includes("Folder2")) {
     console.log("[FAIL] test 14" + resultString);
 }
 
-// test 15
-await createNewList("user1", "Greetings", "test list to be removed");
-await removeList("user1", "Greetings");
-if (!(await listExists("user1", "Greetings"))) {
-    console.log("[PASS] user1 list with name Greetings successfully removed");
+// test 15: create new list
+await createNewList("ejaa", "Greetings", "test list to be removed");
+if (await listExists("ejaa", "Greetings")) {
+    await removeList("ejaa", "Greetings");
+    if (!(await listExists("ejaa", "Greetings"))) {
+        console.log("[PASS] ejaa list with name Greetings successfully removed");
+    } else {
+        console.log("[FAIL] test 15 internal")
+    }
 } else {
     console.log("[FAIL] test 15");
 }
 
 await closeConnection();
-
