@@ -50,6 +50,11 @@ router.get("/createList", (req, res) => {
     res.sendFile(path.join(__dirname, './views/createList.html'));
 });
 
+// List 
+router.get("/list.html", (req, res) => {
+    res.sendFile(path.join(__dirname, './views/list.html'));
+});
+
 router.get("/*", (req, res) => {
     res.redirect("/");
 });
