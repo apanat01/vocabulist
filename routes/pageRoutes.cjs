@@ -50,4 +50,8 @@ router.get("/createList", (req, res) => {
     res.sendFile(path.join(__dirname, './views/createList.html'));
 });
 
+router.get("/*", (req, res) => {
+    res.redirect("/");
+});
+
 module.exports = router;
