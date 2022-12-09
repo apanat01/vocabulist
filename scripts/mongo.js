@@ -68,7 +68,6 @@ export async function login(username, password) {
         if (await userExists(username)) {
             const document = await user_lists.find({ "username": username }).toArray();
             const hash = document[0].password;
-            console.log(hash);
             const result = await bcrypt.compare(password, hash);
             return result;
         }
