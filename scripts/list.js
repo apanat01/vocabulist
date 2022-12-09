@@ -5,7 +5,9 @@ function getAllListWords() {
     const url_params = new URLSearchParams(query_string);
     const list_name = url_params.get("list_name");
     const listHeader = document.getElementById("listHeader");
+
     listHeader.innerHTML = list_name;
+
     const params = {
         "list_name": list_name
     }
@@ -37,15 +39,15 @@ function populateWords(data) {
 const grid_words = document.getElementById("grid_words");
 
 function getWords(term, ipa, pos, definition) {
-    var WordItem = '<div class="gridItem">';
-    WordItem = '<div class="wordHeader">';
-    WordItem += '<p style="width: 12%">' + term + '</p>';
-    WordItem += '<p style="width: 12%">' + ipa + '</p>';
-    WordItem += '<p style="width: 12%">' + pos + '</p>';
-    WordItem += '<p style="width: 60%">' + definition + '</p>';
-    WordItem += '<img src="media/icons/translate.svg" width="2.5%"/>';
-    WordItem += '</div></div>'
+    var wordItem = '<div class="gridItem">';
+    wordItem += '<div class="wordHeader">';
+    wordItem += '<h4 class="word">' + term + '</h4>';
+    wordItem += '<p class="wordInfo">' + ipa + '</p>';
+    wordItem += '<p class="wordInfo">' + pos + '</p>';
+    wordItem += '<p>' + definition + '</p></div>';
+    wordItem += '<a class="iconBtn" onclick="translateWord(this); return false;">'
+    wordItem += '<img src="../../media/icons/translate.svg"/>Translate</a>';
+    wordItem += '</div>'
 
-    grid_words.innerHTML = grid_words.innerHTML + WordItem;
+    grid_words.innerHTML = grid_words.innerHTML + wordItem;
 }
-

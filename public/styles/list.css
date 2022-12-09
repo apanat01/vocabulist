@@ -12,25 +12,34 @@
     gap: 20px;
 }
 
-.grid {
-    background-color: var(--greyLighter);
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+.termList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 .gridItem {
-    display: block;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    background-color: var(--card);
     padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
 }
 
 .wordHeader {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
 }
 
+.wordInfo {
+    color: var(--greyDark);
+}
+
+.iconBtn {
+    display: flex;
+    cursor: pointer;
+}
 
