@@ -44,9 +44,11 @@ function addList(name, words) {
 
 const recentListDiv = document.getElementById("recentListDiv");
 const recentListName = document.getElementById("recentListName");
+const recentListBtn = document.getElementById("recentListBtn");
 
 function populateRecentList(name, desc, words) {
     recentListName.innerHTML = recentListName.innerHTML + " " + name;
+    recentListBtn.href = "/list/routelist/?list_name=" + name;
 
     var listItem = "";
     words.forEach((word) => {
