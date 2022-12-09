@@ -7,13 +7,13 @@ var __dirname = path.resolve();
 router.get("/", (req, res) => {
     console.log("current user: " + req.session.user);
     if (req.session.user == undefined) {    // if there is not an existing session, send login page
-        res.sendFile(path.join(__dirname, './views/login.html'))
+        res.redirect("/login");
     }
     res.sendFile(path.join(__dirname, './views/index.html'));
 });
 
 // Sign up
-router.get("/signUp", (req, res) => {
+router.get("/signup", (req, res) => {
     res.sendFile(path.join(__dirname, './views/signup.html'));
 });
 
