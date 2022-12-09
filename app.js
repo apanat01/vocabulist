@@ -23,8 +23,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/", pages);
-app.use("/list", lists);
-app.use("/translate", translations);
+app.use("/", lists);
+app.use("/", translations);
 
 
 app.get("/scripts/navBar.js", (req, res) => {

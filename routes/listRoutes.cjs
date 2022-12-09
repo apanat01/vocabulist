@@ -42,34 +42,37 @@ router.post("/loginFail", async (req, res) => {
 })
 
 // Create new list
-router.post("/create", async (req, res) => {
+router.post("/list/create", async (req, res) => {
     const username = req.session.user;
-    const list_name = req.body.title;
+    const list_name = req.body.list_name;
     const list_desc = req.body.list_desc;
-    console.log("creating new list", username, list_name, list_desc);
     const {createNewList} = await import ("../scripts/mongo.js");
     createNewList(username, list_name, list_desc);
 })
 
 // Get all lists of a user
-router.post("/getAll", async (req, res) => {
-    const username = "user2";
+router.post("/list/getAll", async (req, res) => {
+    const username = req.session.user;
     const {getListsFromUser} = await import ("../scripts/mongo.js");
-    // console.log(await getListsFromUser(user_id));
     res.json(await getListsFromUser(username));
 })
 
 // Get words of one list
-router.post("/getOne", async (req, res) => {
-    const username = "user2";
+router.post("/list/getOne", async (req, res) => {
+    const username = req.session.user;
     const list_name = "Things";
     const {getWordsFromList} = await import ("../scripts/mongo.js");
-    res.json(await getWordsFromList(username, list_name))
+    res.json(await getWordsFromList(username, list_name));
 })
 
 // Add words to list
-router.post("/addWords", async (req, res) => {
-    
+router.post("/list/addWords", async (req, res) => {
+    const username = req.session.user;
+    const list_name = req.body.list_name;
+    const words = req.body.words;
+    console.log("add words request", username, list_name, words);
+    const {addWordsToList} = await import ("../scripts/mongo.js");
+    res.json(await addWordsToList(username, list_name, words));
 })
 
 module.exports = router;

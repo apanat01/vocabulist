@@ -25,16 +25,20 @@ function populate(query, data) {
     resultsDiv.innerHTML = "";
     
     const resultsInfo = document.getElementById("resultsInfo");
-    resultsInfo.innerHTML = data.length + " results for '" + query + "'"; 
 
     const clearBtn = document.getElementById("clearBtn");
     clearBtn.innerHTML = "Clear results";
 
-    data.forEach((res) => {
-        const meaning = res.meanings[0];
-        const phonetic = res.phonetic;
-        addWordResult(query, meaning, phonetic);
-    })
+    if (data.title == "No Definitions Found") {
+        resultsInfo.innerHTML = "No results found"; 
+    } else {
+        resultsInfo.innerHTML = data.length + " results for '" + query + "'"; 
+        data.forEach((res) => {
+            const meaning = res.meanings[0];
+            const phonetic = res.phonetic;
+            addWordResult(query, meaning, phonetic);
+        })
+    }
 }
 
 function addWordResult(word, meaning, phonetic) {
@@ -54,7 +58,7 @@ function addWordResult(word, meaning, phonetic) {
     wordCard += '<div class="termActionDiv">';
     wordCard += '<a onclick="addWord(this); return false">Add to list</a>';
     wordCard += '<img class="iconBtn" src="media/icons/star.svg"/>';
-    wordCard += '<img class="iconBtn" src="media/icons/translate.svg"/>';
+    wordCard += '<img class="iconBtn" onclick="translateWord(this); return false;" src="media/icons/translate.svg"/>';
     wordCard += '</div></div>';
 
     const resultsDiv = document.getElementById("searchResults");

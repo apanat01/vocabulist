@@ -165,6 +165,7 @@ export async function createNewList(username, listName, listDescription) {
  */
 export async function addWordsToList(username, listName, words) {
     try {
+        console.log("in mongo adding words to list");
         await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $addToSet: { "lists.$.words": { $each: words } } });
     } catch (e) {
         console.error(e);

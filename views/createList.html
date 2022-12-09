@@ -37,25 +37,26 @@
       <form id="listProperties" class="subsection"  method="post" action="/list/create">
         <input type="text" id="list_name" name="list_name" placeholder="Enter title, like 'Personal Finance Terms'">
         <textarea id="list_desc" name="list_desc" rows="6" cols="10" placeholder="Add a description..."></textarea> 
-        <div>
-          <h4 id="addedTermsHeader"></h4>
-          <div id="addedTerms" class="cardList"></div>
-        </div>
-        <div id="searchWrapper">
-          <h4>Add terms</h4>
-          <div id="termSearch">
-            <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
-            <a id="searchBtn" class="btn-primary-med" value="Search">Search</a>
-            <a id="clearBtn"></a>  
-          </div>
-          <div id="resultsInfo" class="searchResultText"></div>
-          <div id="searchResults" class="cardList"></div>
-        </div>
-        <div style="width: 30%">
-          <input type="submit" class="btn-primary-med" id="createListBtn" value="Finish creating list">
-        </div>
       </form>
+      <div>
+        <h4 id="addedTermsHeader"></h4>
+        <div id="addedTerms" class="cardList"></div>
+      </div>
+      <div id="searchWrapper">
+        <h4>Add terms</h4>
+        <div id="termSearch">
+          <input type="text" id="termQuery" name="termQuery" placeholder="Search for a term to add">
+          <a id="searchBtn" class="btn-primary-med" value="Search">Search</a>
+          <a id="clearBtn"></a>  
+        </div>
+        <div id="resultsInfo" class="searchResultText"></div>
+        <div id="searchResults" class="cardList"></div>
+      </div>
+      <div style="width: 30%">
+        <input type="submit" class="btn-primary-med" id="createListBtn" value="Finish creating list">
+      </div>
     </div>
+    <script src="scripts/translate.js"></script>
     <script src="scripts/definition.js"></script>
     <script src="scripts/createList.js"></script>
     <script src="scripts/theme.js"></script>

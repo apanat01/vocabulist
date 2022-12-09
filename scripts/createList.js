@@ -55,28 +55,51 @@ function clearResults() {
     termQuery.value = "";
 }
 
-// // Create and add words to list in db
-// function createList() {
-//     const list_name = document.getElementById("title").value;
-//     const list_desc = document.getElementById("desc").value;
+function createNewList() {
+    const list_name = document.getElementById("list_name").value;
+    const list_desc = document.getElementById("list_desc").value;
+    
+    const params = {
+        "list_name": list_name,
+        "list_desc": list_desc
+    }
 
-//     console.log(list_name, list_desc);
-//     console.log(typeof list_name);
+    fetch("/list/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            mode: 'no-cors'
+        },
+        body: JSON.stringify(params)
+    })
+    .then(res => res.text())
+    .then(data => console.log(JSON.parse(data)))
+    .catch(err => console.log(err));
+}
 
-//     const params = {
-//         list_name: list_name,
-//         list_desc: list_desc
-//     };
+function addWordsToList() {
+    const list_name = document.getElementById("list_name").value;
 
-//     fetch("/list/create", {
-//         method: "GET",
-//         header: {
-//             "Content-Type": "application/json",
-//             mode: 'no-cors'
-//         },
-//         body: JSON.stringify(params)
-//     })
-//     // .then(res => res.text())
-//     .then(data => console.log("Data", data))
-//     .catch(err => console.log("Err", err));
-// }
+    const params = {
+        "words": addedWordList,
+        "list_name": list_name
+    };
+
+    fetch("/list/addWords", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", 
+            mode: 'no-cors'
+        },
+        body: JSON.stringify(params)
+    })
+    .then(res => res.text())
+    .then(data => console.log(JSON.parse(data)))
+    .catch(err => console.log(err));
+}
+
+const createListBtn = document.getElementById("createListBtn");
+createListBtn.addEventListener("click", () => {
+    createNewList();
+    addWordsToList();
+})
