@@ -1,28 +1,18 @@
-const baseURL = "https://od-api.oxforddictionaries.com/api/v2"
-const appId = '6428d6a9';
-const appKey = 'e76667ef9a16a48f2021a29896009dfa';
-const headers = {app_id: appId, app_key: appKey}
+function translateWord(elem) {
+    const parentDiv = (elem.parentNode).parentNode;
+    const term = parentDiv.querySelector(".word");
+    const word = term.innerHTML;
 
-const source_lang = "en";
-const target_lang = "es";
-const word = "hello"
+    var url = "/translate/word/";
 
-function translateWord() {
-    const url = `${baseURL}/translate/${source_lang}/${target_lang}/${word}`;
-
-    fetch(url, {
+    fetch(url + word, {
         method: "GET",
         headers: {
-            "Accept": "application/json",
-            "app_id": appId,
-            "app_key": appKey
+            "Content-Type": "application/json",
+            mode: 'no-cors'
         },
-        redirect: "follow"
     })
     .then(res => res.text())
-    .then(data => console.log(JSON.parse(data)))
+    .then(data => term.innerHTML = data)
     .catch(err => console.log(err));
 }
-
-const translateBtn = document.getElementById("translateBtn");
-translateBtn.addEventListener("click", translateWord(), false);

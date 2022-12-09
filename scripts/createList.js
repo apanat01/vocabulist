@@ -5,23 +5,22 @@ const termsHeader = document.getElementById("addedTermsHeader");
 
 // Adds word to "Terms" list
 function addWord(elem) {
-    const btn = elem;
     const parentDiv = (elem.parentNode).parentNode;
-    const word = parentDiv.querySelector(".word").innerHTML;
+    const term = parentDiv.querySelector(".word").innerHTML;
     const definition = parentDiv.querySelector(".definition").innerHTML;
     const ipa = parentDiv.querySelector(".ipa").innerHTML;
-    const partOfSpeech = parentDiv.querySelector(".partOfSpeech").innerHTML;
+    const pos = parentDiv.querySelector(".partOfSpeech").innerHTML;
 
     const wordObj = {
-        "word": word,
-        "definition": definition,
+        "term": term,
         "ipa": ipa,
-        "partOfSpeech": partOfSpeech
+        "pos": pos,
+        "definition": definition
     }
 
     addedWordList.push(wordObj);
     termsHeader.innerHTML = "<h4>Terms</h4>";
-    termsDiv.innerHTML = termsDiv.innerHTML + createAddedWord(word, definition);
+    termsDiv.innerHTML = termsDiv.innerHTML + createAddedWord(term, definition);
 }
    
 // Creates html for word item
@@ -56,7 +55,51 @@ function clearResults() {
     termQuery.value = "";
 }
 
+function createNewList() {
+    const list_name = document.getElementById("list_name").value;
+    const list_desc = document.getElementById("list_desc").value;
+    
+    const params = {
+        "list_name": list_name,
+        "list_desc": list_desc
+    }
+
+    fetch("/list/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            mode: 'no-cors'
+        },
+        body: JSON.stringify(params)
+    })
+    .then(res => res.text())
+    .then(data => console.log(JSON.parse(data)))
+    .catch(err => console.log(err));
+}
+
+function addWordsToList() {
+    const list_name = document.getElementById("list_name").value;
+
+    const params = {
+        "words": addedWordList,
+        "list_name": list_name
+    };
+
+    fetch("/list/addWords", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json", 
+            mode: 'no-cors'
+        },
+        body: JSON.stringify(params)
+    })
+    .then(res => res.text())
+    .then(data => console.log(JSON.parse(data)))
+    .catch(err => console.log(err));
+}
+
 const createListBtn = document.getElementById("createListBtn");
 createListBtn.addEventListener("click", () => {
-    console.log(addedWordList);
+    createNewList();
+    addWordsToList();
 })

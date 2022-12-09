@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var path = require('path');
+const bodyParser = require("body-parser");
 
 // Sign up
 router.post("/signup", async (req, res) => {
@@ -42,31 +43,39 @@ router.post("/loginFail", async (req, res) => {
 
 // Create new list
 router.post("/list/create", async (req, res) => {
-    const username = "user1";
+    const username = req.session.user;
     const list_name = req.body.list_name;
-    const list_description = req.body.list_description;
+    const list_desc = req.body.list_desc;
     const {createNewList} = await import ("../scripts/mongo.js");
-    createNewList(username, list_name, list_description);
-    // res.send("it worked");
+    createNewList(username, list_name, list_desc);
 })
 
 // Get all lists of a user
 router.post("/list/getAll", async (req, res) => {
-    const username = "user2";
+    const username = req.session.user;
     const {getListsFromUser} = await import ("../scripts/mongo.js");
-    // console.log(await getListsFromUser(user_id));
     res.json(await getListsFromUser(username));
 })
 
 // Get words of one list
 router.post("/list/getOne", async (req, res) => {
-    const username = "user2";
+    const username = req.session.user;
     const list_name = "Things";
     const {getWordsFromList} = await import ("../scripts/mongo.js");
-    res.json(await getWordsFromList(username, list_name))
+    res.json(await getWordsFromList(username, list_name));
 })
 
-// Add word to list
+// Add words to list
+router.post("/list/addWords", async (req, res) => {
+    const username = req.session.user;
+    const list_name = req.body.list_name;
+    const words = req.body.words;
+    console.log("add words request", username, list_name, words);
+    const {addWordsToList} = await import ("../scripts/mongo.js");
+    res.json(await addWordsToList(username, list_name, words));
+})
+
+// Get words from list
 router.post("/list/getWords", async (req, res) => {
     const username = "ejaa";
     const list_name = "Fruits";
