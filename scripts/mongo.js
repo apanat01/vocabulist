@@ -1,5 +1,5 @@
-import { MongoClient } from 'mongodb';
-import bcrypt from 'bcrypt';
+const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
 
 const uri = process.env.MONGODB_URI || "mongodb+srv://dbuser:u8QXNaLsgPie4749@cluster0.z9zkrwk.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri);
@@ -10,7 +10,7 @@ const user_lists = database.collection('user_lists');
  * gets all data from all documents
  * @returns array of all data
  */
-export async function getAllData() {
+async function getAllData() {
     try {
         return await user_lists.find().toArray();
     } catch (e) {
@@ -22,7 +22,7 @@ export async function getAllData() {
  * checks if user exists
  * @returns true if exists, false if not
  */
-export async function userExists(username) {
+async function userExists(username) {
     try {
         let result = await user_lists.find({ "username": username }).toArray();
 
@@ -41,7 +41,7 @@ export async function userExists(username) {
  * creates new user if provided username is not already in use
  * @param {String} username 
  */
- export async function createNewUser(username, password) {
+async function createNewUser(username, password) {
     try {
         console.log("creating new user " + username);
         if (!(await userExists(username))) {
@@ -63,7 +63,7 @@ export async function userExists(username) {
  * checks if any users in db match provided credentials
  * @returns true if so, false if not
  */
-export async function login(username, password) {
+async function login(username, password) {
     try {
         if (await userExists(username)) {
             const document = await user_lists.find({ "username": username }).toArray();
@@ -83,7 +83,7 @@ export async function login(username, password) {
  * @param {String} listName 
  * @returns true if list exists for user, false otherwise
  */
-export async function listExists(username, listName) {
+async function listExists(username, listName) {
     try {
         let result = await user_lists.find({ "username": username, "lists.list_name": listName }).toArray();
 
@@ -104,7 +104,7 @@ export async function listExists(username, listName) {
  * @param {String} listName 
  * @param {String} listDescription 
  */
-export async function createNewList(username, listName, listDescription) {
+async function createNewList(username, listName, listDescription) {
     try {
         if (!(await listExists(username, listName))) {
             await user_lists.updateOne({ "username": username },  
@@ -132,7 +132,7 @@ export async function createNewList(username, listName, listDescription) {
  * @param {String} listName
  * @param {Array} words an array of objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
-export async function addWordsToList(username, listName, words) {
+async function addWordsToList(username, listName, words) {
     try {
         console.log("in mongo adding words to list");
         await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $addToSet: { "lists.$.words": { $each: words } } });
@@ -148,7 +148,7 @@ export async function addWordsToList(username, listName, words) {
  * @param {String} listName 
  * @returns array of word objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
-export async function getWordsFromList(username, listName) {
+async function getWordsFromList(username, listName) {
     try {
         console.log("getting words from list " + listName);
         let result = await user_lists.find({ "username": username, "lists.list_name": listName }).toArray();
@@ -165,45 +165,11 @@ export async function getWordsFromList(username, listName) {
  * @param {String} username
  * @returns array of lists
  */
- export async function getListsFromUser(username) {
+async function getListsFromUser(username) {
     try {
         console.log("getting lists from user " + username);
         let lists = await user_lists.distinct("lists",{"username": username});
         return lists;
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * adds array of words to favorites for a specified list and user
- * ASSUMES: user exists, list exists, words exist in list
- * does not add duplicates
- * @param {String} username 
- * @param {String} listName 
- * @param {Array} words array of objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
- */
-export async function addWordsToFavorites(username, listName, words) {
-    try {
-        await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $addToSet: { "lists.$.favorites": { $each: words } } });
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * gets words designated as favorites from specified list for specified user
- * ASSUMES: user exists, list exists
- * @param {String} username
- * @param {String} listName
- * @returns array of favorited word objects with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
- */
-export async function getWordsFromFavorites(username, listName) {
-    try {
-        console.log("getting favorites from list " + listName);
-        let result = await user_lists.find({ "username": username }).toArray();
-        let favorites = await result[0].lists.find(list => list.list_name == listName).favorites;
-        return favorites;
     } catch (e) {
         console.error(e);
     }
@@ -215,7 +181,7 @@ export async function getWordsFromFavorites(username, listName) {
  * @param {String} username 
  * @param {String} folderName 
  */
-export async function createNewFolder(username, folderName) {
+async function createNewFolder(username, folderName) {
     try {
         await user_lists.updateOne({ "username": username, "folders.folder_name": { $ne: folderName } }, { $addToSet: { "folders": { "folder_name": folderName, "folder_lists": [] } } } );
     } catch (e) {
@@ -229,7 +195,7 @@ export async function createNewFolder(username, folderName) {
  * @param {String} username 
  * @returns array of folder names
  */
-export async function getFolderNames(username) {
+async function getFolderNames(username) {
     try {
         let result = await user_lists.find({ "username": username }).toArray();
         let folderNames = [];
@@ -249,7 +215,7 @@ export async function getFolderNames(username) {
  * @param {String} folderName 
  * @param {Array} listNames 
  */
-export async function addListsToFolder(username, folderName, listNames) {
+async function addListsToFolder(username, folderName, listNames) {
     try {
         await user_lists.updateOne({ "username": username, "folders.folder_name": folderName}, { $addToSet: { "folders.$.folder_lists": { $each: listNames }}})
     } catch (e) {
@@ -264,7 +230,7 @@ export async function addListsToFolder(username, folderName, listNames) {
  * @param {String} folderName 
  * @returns array of list names
  */
-export async function getListsFromFolder(username, folderName) {
+async function getListsFromFolder(username, folderName) {
     try {
         console.log("getting lists from folder " + folderName);
         let result = await user_lists.find({ "username": username }).toArray();
@@ -281,24 +247,9 @@ export async function getListsFromFolder(username, folderName) {
  * @param {String} username 
  * @param {Array} words - array of words objects to remove with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
  */
-export async function removeWordsFromList(username, listName, words) {
+async function removeWordsFromList(username, listName, words) {
     try {
         await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $pull: { "lists.$.words": { $in: words } } });
-    } catch (e) {
-        console.error(e);
-    }
-}
-
-/**
- * removes words from favorites for specified user
- * ASSUMES: user exists, list exists, all words to be removed exist
- * @param {String} username 
- * @param {String} listName 
- * @param {Array} words - array of words objects to remove with format [{term: "apple", ipa: "/ˈæpl/", pos: "noun", definition: "the round fruit of a tree of the rose family"}, ...]
- */
-export async function removeWordsFromFavorites(username, listName, words) {
-    try {
-        await user_lists.updateOne({ "username": username, "lists.list_name": listName },  { $pull: { "lists.$.favorites": { $in: words } } });
     } catch (e) {
         console.error(e);
     }
@@ -311,7 +262,7 @@ export async function removeWordsFromFavorites(username, listName, words) {
  * @param {String} folderName 
  * @param {Array} lists - array of list names to be removed
  */
-export async function removeListsFromFolder(username, folderName, listNames) {
+async function removeListsFromFolder(username, folderName, listNames) {
     try {
         await user_lists.updateOne({ "username": username, "folders.folder_name": folderName}, { $pull: { "folders.$.folder_lists": { $in: listNames }}});
     } catch (e) {
@@ -323,7 +274,7 @@ export async function removeListsFromFolder(username, folderName, listNames) {
  * removes folder for specified user
  * ASSUMES: user exists, folder exists
  */
-export async function removeFolder(username, folderName) {
+async function removeFolder(username, folderName) {
     try {
         await user_lists.updateOne({ "username": username }, { $pull: { "folders": { "folder_name": folderName } }});
     } catch (e) {
@@ -337,7 +288,7 @@ export async function removeFolder(username, folderName) {
  * @param {String} username 
  * @param {String} listName 
  */
-export async function removeList(username, listName) {
+async function removeList(username, listName) {
     try {
         await user_lists.updateOne({ "username": username }, { $pull: { "lists": { "list_name": listName } }});
     } catch (e) {
@@ -348,6 +299,27 @@ export async function removeList(username, listName) {
 /**
  * closes mongo client connection
  */
-export async function closeConnection() {
+async function closeConnection() {
     await client.close();
+}
+
+module.exports = {
+    getAllData, 
+    userExists, 
+    createNewUser, 
+    login,
+    listExists, 
+    createNewList, 
+    addWordsToList, 
+    getWordsFromList,
+    getListsFromUser,
+    createNewFolder, 
+    getFolderNames,
+    addListsToFolder,
+    getListsFromFolder,
+    removeWordsFromList,
+    removeListsFromFolder,
+    removeFolder,
+    removeList,
+    closeConnection
 }
