@@ -26,7 +26,7 @@ function addWord(elem) {
 // Creates html for word item
 function createAddedWord(word, definition) {
     var addedWord = '<div class="card">';
-    addedWord += '<div>';
+    addedWord += '<div class="wordInfo">';
     addedWord += '<h4 class="word added">' + word + '</h4>';
     addedWord += '<p class="definition">' + definition + '</p>';
     addedWord += '</div>';
@@ -59,6 +59,16 @@ function createNewList() {
     const list_name = document.getElementById("list_name").value;
     const list_desc = document.getElementById("list_desc").value;
 
+    if (list_name == "") {
+        alert("Please enter a list name");
+        return false;
+    }
+
+    if (addedWordList.length == 0) {
+        alert("Please add at least one term to your list")
+        return false;
+    } 
+
     const params = {
         "list_name": list_name,
         "list_desc": list_desc
@@ -75,11 +85,14 @@ function createNewList() {
     .then(res => res.text())
     .then(data => console.log(JSON.parse(data)))
     .catch(err => console.log(err));
+
+    return true;
 }
 
 function addWordsToList() {
     const list_name = document.getElementById("list_name").value;
 
+    console.log("added word list", addedWordList);
     const params = {
         "words": addedWordList,
         "list_name": list_name
@@ -100,6 +113,7 @@ function addWordsToList() {
 
 const createListBtn = document.getElementById("createListBtn");
 createListBtn.addEventListener("click", () => {
-    createNewList();
-    addWordsToList();
+    if (createNewList()) {
+        addWordsToList();
+    };
 })

@@ -2,7 +2,6 @@ const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
 const searchBtn = document.getElementById("searchBtn");
 searchBtn.addEventListener("click", () => {
-    console.log("here");
     defineWord();
 })
 
@@ -48,7 +47,7 @@ function addWordResult(word, meaning, phonetic) {
     const pronounciation = (phonetic == null) ? "" : phonetic;
     
     var wordCard = '<div class="card">';
-    wordCard += '<div>';
+    wordCard += '<div class="wordWrapper">';
     wordCard += '<h4 class="word">' + word + '</h4>';
     wordCard += '<div class="wordInfo">'
     wordCard += '<p class="ipa">' + pronounciation + '</p>';
