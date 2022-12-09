@@ -117,5 +117,6 @@ const createListBtn = document.getElementById("createListBtn");
 createListBtn.addEventListener("click", () => {
     if (createNewList()) {
         addWordsToList();
+        
     };
 })
