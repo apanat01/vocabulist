@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var path = require('path');
+var __dirname = path.resolve();
 // const bodyParser = require("body-parser");
 
 // Sign up
@@ -76,13 +77,22 @@ router.post("/list/addWords", async (req, res) => {
 })
 
 // Get words from list
-router.post("/list/getWords", async (req, res) => {
-    const username = "ejaa";
-    const list_name = "Fruits";
+router.get("/list/routelist", async (req, res) => {
+    const list_name = req.query.list_name;
+    console.log(list_name);
+    res.sendFile(path.join(__dirname, './views/list.html'));
+    // res.send('list/hello');
     // console.log(req.body)
-    const {getWordsFromList} = await import ("../scripts/mongo.js");
+   // const {getWordsFromList} = await import ("../scripts/mongo.js");
     // console.log(await getListsFromUser(user_id));
     // console.log(list_name);
+   // res.json(await getWordsFromList(username, list_name));
+})
+
+router.post("/list/getWords", async (req, res) => {
+    const list_name = req.body.list_name;
+    const username = req.session.user;
+    const {getWordsFromList} = await import ("../scripts/mongo.js");
     res.json(await getWordsFromList(username, list_name));
 })
 

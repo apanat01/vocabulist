@@ -29,10 +29,14 @@ function addList(name, desc, words) {
     var listCard = '<div class="cardListWrapper">';
     listCard += '<div class="cardHeader">';
     listCard += '<h3>' + name + '</h3>';
-    listCard += '<a href="/list">View list</a></div>';
+    listCard += '<a href="/list/routelist/?list_name='+ name +'">View list</a></div>';
     listCard += '<div class="cardList">';
     listCard += '<p>' + desc + '</p>';
     listCard += '</div></div>'
 
     listsDiv.innerHTML = listsDiv.innerHTML + listCard;
+}
+
+function getList(elem) {
+
 }

@@ -55,6 +55,12 @@ router.get("/list", (req, res) => {
     res.sendFile(path.join(__dirname, './views/list.html'));
 });
 
+// Log out
+router.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect('/login');
+})
+
 // router.get("/*", (req, res) => {
 //     res.redirect("/");
 // });

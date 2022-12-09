@@ -1,12 +1,21 @@
 window.onload = () => getAllListWords();
 
 function getAllListWords() {
+    const query_string = window.location.search;
+    const url_params = new URLSearchParams(query_string);
+    const list_name = url_params.get("list_name");
+    const listHeader = document.getElementById("listHeader");
+    listHeader.innerHTML = list_name;
+    const params = {
+        "list_name": list_name
+    }
     fetch("/list/getWords", {
         method: "POST",
         headers: {
             "Content-Type": "application/json", 
             mode: 'no-cors'
-    }
+    },
+    body: JSON.stringify(params)
     })
     .then(res => res.text())
     .then(data => populateWords(JSON.parse(data)))
