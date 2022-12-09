@@ -55,4 +55,7 @@ router.get("/list", (req, res) => {
     res.sendFile(path.join(__dirname, './views/list.html'));
 });
 
+// router.get("/*", (req, res) => {
+//     res.redirect("/");
+// });
 module.exports = router;
