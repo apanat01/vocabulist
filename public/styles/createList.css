@@ -58,13 +58,15 @@
 }
 
 .iconBtn {
+    display: flex;
     cursor: pointer;
 }
 
 .termActionDiv {
     display: flex;
-    align-items: start;
-    gap: 6px;
+    flex-direction: column;
+    align-items: end;
+    gap: 14px;
 }
 
 #termsWrapper {

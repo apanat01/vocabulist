@@ -25,19 +25,22 @@ router.get("/translate/word/:word", async (req, res) => {
     })
     .then(res => res.text())
     .then(data => { 
-        // console.log(data)
-        const pdata = JSON.parse(data);
-        const lexicalEntries = pdata.results[0].lexicalEntries[0];
-        const senses = lexicalEntries.entries[0].senses[0];
-        
-        var translation = "";
-        if (senses.subsenses != null) {
-            translation = senses.subsenses[0].translations[0].text;
+        if (data == undefined) {
+            res.send(word);
         } else {
-            translation = senses.translations[0].text;
-        }
+            const pdata = JSON.parse(data);
+            const lexicalEntries = pdata.results[0].lexicalEntries[0];
+            const senses = lexicalEntries.entries[0].senses[0];
+            
+            var translation = "";
+            if (senses.subsenses != null) {
+                translation = senses.subsenses[0].translations[0].text;
+            } else {
+                translation = senses.translations[0].text;
+            }
 
-        res.send(translation);
+            res.send(translation);
+        }
     })
 })
 

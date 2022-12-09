@@ -31,7 +31,9 @@ function createAddedWord(word, definition) {
     addedWord += '<p class="definition">' + definition + '</p>';
     addedWord += '</div>';
     addedWord += '<div class="termActionDiv">';
-    addedWord += '<img class="iconBtn" src="media/icons/translate.svg"/>';
+    addedWord += '<a class="iconBtn" onclick="translateWord(this); return false;">';
+    addedWord += '<img src="media/icons/translate.svg"/>';
+    addedWord += '&nbspTranslate</a>';
     addedWord += '</div></div>';
 
     return addedWord;

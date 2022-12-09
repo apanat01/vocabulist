@@ -56,9 +56,11 @@ function addWordResult(word, meaning, phonetic) {
     wordCard += '</div>';
     wordCard += '</div>';
     wordCard += '<div class="termActionDiv">';
-    wordCard += '<a onclick="addWord(this); return false">Add to list</a>';
-    wordCard += '<img class="iconBtn" src="media/icons/star.svg"/>';
-    wordCard += '<img class="iconBtn" onclick="translateWord(this); return false;" src="media/icons/translate.svg"/>';
+    wordCard += '<a class="iconBtn" onclick="addWord(this); return false">';
+    wordCard += '<img src="media/icons/plus.svg"/>&nbspAdd to list</a>';
+    wordCard += '<a class="iconBtn" onclick="translateWord(this); return false;">';
+    wordCard += '<img src="media/icons/translate.svg"/>';
+    wordCard += '&nbspTranslate</a>';
     wordCard += '</div></div>';
 
     const resultsDiv = document.getElementById("searchResults");
