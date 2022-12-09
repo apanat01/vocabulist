@@ -1,3 +1,13 @@
+#logo {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 200px;
+    
+    margin: auto;
+    max-width: 370px;
+}
+
 #input-fields {
     position: absolute;
     top: 0;
