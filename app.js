@@ -63,6 +63,10 @@ app.get("/scripts/index.js", (req, res) => {
     res.sendFile(path.join(__dirname, './scripts/index.js'));
 });
 
+app.get("/scripts/list.js", (req, res) => {
+    res.sendFile(path.join(__dirname, './scripts/list.js'));
+});
+
 //TEST
 app.get("/test", (req, res) => {
     res.sendFile(path.join(__dirname, './views/test.html'));
