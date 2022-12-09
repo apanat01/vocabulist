@@ -13,6 +13,10 @@ function translateWord(elem) {
         },
     })
     .then(res => res.text())
-    .then(data => term.innerHTML = data)
+    .then(data => {
+        if (data == "") {
+            console.log("No translation found");
+        } else {
+            term.innerHTML = data}})
     .catch(err => console.log(err));
 }

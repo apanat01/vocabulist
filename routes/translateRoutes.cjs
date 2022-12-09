@@ -21,24 +21,23 @@ router.get("/translate/word/:word", async (req, res) => {
             "app_id": appId,
             "app_key": appKey
         },
-        redirect: "follow"
+        // redirect: "follow"
     })
     .then(res => res.text())
-    .then(data => { 
-        if (data == undefined) {
+    .then(data => {
+        if ((JSON.parse(data).error) != undefined) {
             res.send(word);
         } else {
             const pdata = JSON.parse(data);
             const lexicalEntries = pdata.results[0].lexicalEntries[0];
             const senses = lexicalEntries.entries[0].senses[0];
-            
+
             var translation = "";
             if (senses.subsenses != null) {
                 translation = senses.subsenses[0].translations[0].text;
             } else {
                 translation = senses.translations[0].text;
             }
-
             res.send(translation);
         }
     })
