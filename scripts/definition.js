@@ -2,6 +2,7 @@ const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
 const searchBtn = document.getElementById("searchBtn");
 searchBtn.addEventListener("click", () => {
+    console.log("here");
     defineWord();
 })
 

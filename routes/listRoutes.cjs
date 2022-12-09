@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 var path = require('path');
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 // Sign up
 router.post("/signup", async (req, res) => {

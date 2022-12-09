@@ -27,7 +27,6 @@ function populateWords(data) {
 
 const grid_words = document.getElementById("grid_words");
 
-
 function getWords(term, ipa, pos, definition) {
     var WordItem = '<div class="gridItem">';
     WordItem = '<div class="wordHeader">';

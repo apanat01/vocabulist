@@ -58,7 +58,7 @@ function clearResults() {
 function createNewList() {
     const list_name = document.getElementById("list_name").value;
     const list_desc = document.getElementById("list_desc").value;
-    
+
     const params = {
         "list_name": list_name,
         "list_desc": list_desc
