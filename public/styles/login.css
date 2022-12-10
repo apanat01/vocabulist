@@ -1,7 +1,10 @@
+body {
+  grid-template-columns: none;
+  grid-template-rows: 1fr 8fr;
+  gap: 0px;
+}
+
 #logo {
-    position: absolute;
-    left: 0;
-    right: 0;
     height: 200px;
     
     margin: auto;
@@ -9,19 +12,11 @@
 }
 
 #input-fields {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    
     margin: auto;
+    margin-top: 0;
     width: 60%;
     max-width: 370px;
     height: fit-content;
-    align-items: center;
-    display: flex;
-    justify-content: center;
 
     border-radius: 4px;
     background-color: var(--card);
